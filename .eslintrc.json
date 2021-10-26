@@ -14,9 +14,9 @@
         "ecmaVersion": 2018
     },
     "rules": {
-        "comma-dangle": 0,
-        "no-useless-catch": 0,
-        "no-underscore-dangle": 0,
-        "linebreak-style": 0
+        "comma-dangle": 1,
+        "no-useless-catch": 1,
+        "no-underscore-dangle": 1,
+        "linebreak-style": 1
     }
 }
