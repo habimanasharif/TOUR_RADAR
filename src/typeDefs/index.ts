@@ -1,8 +1,8 @@
 import  { query } from  "./query";
 import  { mutation} from  "./mutation";
-import { bookType,categoryType,userType } from "./types";
+import { userType } from "./types";
 
-const typeDefs = [query,mutation,bookType,categoryType,userType];
+const typeDefs = [query,mutation,userType];
 
 export {
   typeDefs,
