@@ -2,11 +2,7 @@ const { gql } = require("apollo-server");
 
 const mutation = gql`
   type Mutation {
-      addBook(
-    title: String!
-    author: String!
-      ): Book
-
+    #all mutations
       #user mutation
     signUp(
       firstname: String
