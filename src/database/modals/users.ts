@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: false,
       },
-      isPoet: {
+      isGuider: {
         type: String,
         default: false,
       },

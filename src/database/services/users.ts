@@ -8,10 +8,10 @@ class UserService {
             throw error
         }
     }
-   static async findUser(email:string)
+   static async findUser(data:any)
    {
        try {
-          return await Users.findOne({email:email}) ;
+          return await Users.findOne(data) ;
        } catch (error) {
            throw error
        }

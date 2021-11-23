@@ -11,6 +11,7 @@ const userType = gql`
     isVerified:String
     role:String
     bio:String
+    token:String
     website:String
   createdAt:String
   }
