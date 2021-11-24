@@ -19,6 +19,7 @@ JWT_SECRET=
 
 ### User
 - [User Signup](#1-user-signup-mutation)
+- [User LogIn](#2-user-LogIn-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -66,6 +67,33 @@ Response
             "bio": "**No Biography**",
             "website": null,
             "createdAt": "1635290132898"
+        }
+    }
+}
+```
+
+### 2. User LogIn: MUTATION
+Body
+```gql
+mutation ex{
+    logIn(
+    account:"wizzysharifivk@gmail.com"
+    password:"drop."
+    ){
+     username,
+     email,
+     token
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "logIn": {
+            "username": "keleva96",
+            "email": "wizzysharifivk@gmail.com",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Indpenp5c2hhcmlmaXZrQGdtYWlsLmNvbSIsImlkIjoiNjE5ZTZjNzRkYjdiMjc3NTU3MGQyODM4Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2Mzc3NzMwMjJ9.CTJmnqpG7TWYSDg8t2QzOkpdRg3rLgZo8n7lfI6t6Is"
         }
     }
 }
