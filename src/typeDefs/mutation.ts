@@ -17,6 +17,13 @@ const mutation = gql`
     website:String
   createdAt:String
     ):User
+    #logIn mutation
+    logIn(
+      
+      password:String
+      account:String
+    ):User
+  
   }
 `;
 

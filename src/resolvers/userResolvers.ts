@@ -6,6 +6,10 @@ const userResolvers = {
   },
   Mutation:{
    signUp:(parent:any,args:any,ctx:any)=>User.signUp(parent, args,ctx),
+   //login
+   logIn:(parent:any,args:any,ctx:any)=>User.logIn(parent,args,ctx),
+
+
   }
 };
 
