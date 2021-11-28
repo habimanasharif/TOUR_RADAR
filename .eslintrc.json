@@ -41,6 +41,9 @@
          ],
         " import/extensions":0,
         "no-useless-catch": 0,
+        "no-console":0,
+            "@typescript-eslint/no-explicit-any": "off",
+        "no-any": [0, { "ignore-rest-args": false }],
         "no-underscore-dangle": 0,
         "linebreak-style": 0
 
