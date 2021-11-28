@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable import/extensions */
 import mongoose from 'mongoose';
 import config from '../config';
 

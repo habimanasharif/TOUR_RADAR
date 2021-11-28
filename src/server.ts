@@ -1,12 +1,10 @@
+/* eslint-disable import/extensions */
+import { ApolloServer } from 'apollo-server';
 import dbConnect from './database';
-import { ApolloServer, gql } from 'apollo-server';
-import { typeDefs } from"./typeDefs";
-import { resolvers }  from "./resolvers";
+import { typeDefs } from './typeDefs';
+import resolvers from './resolvers';
 
-
-  dbConnect();
-  
-
+dbConnect();
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
