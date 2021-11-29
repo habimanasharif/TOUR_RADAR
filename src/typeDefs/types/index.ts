@@ -1,7 +1,9 @@
 
 import { userType} from "./UserType";
+import { AdminType} from "./AdminType"
 
 
 export {
-userType
+userType,
+AdminType
 };
