@@ -44,21 +44,6 @@ class User {
 
     return newAcount;
   }
-<<<<<<< HEAD
-=======
-
-  /**verifying email function
-  1.get data from the token
-  2. use the ID from the token to fetch user
-  3.if user doesnt exists throw error
-  4.update isverified to true
-  4.1user.password:undifined
-  5.return data without password
-  */
- 
-}
-export {User}
->>>>>>> starts verifying email
 
   static async logIn(parent:any, { password, account }:{password:string, account:string}, ctx:any) {
     const exists = await UserService.findUser({ $or: [{ email: account }, { username: account }] });
