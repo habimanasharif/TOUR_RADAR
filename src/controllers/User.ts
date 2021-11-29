@@ -17,7 +17,7 @@ class User {
     {firstname:string, lastname:string, username:string, password:string, email:string, role:string},
   ctx:any) {
     const exists = await UserService.findUser({ $or: [{ email }, { username }] });
-    if (exists) {
+    if (!exists) {
       throw new UserInputError('USER EXISTS ERROR');
     }
     Validations.signUp({
