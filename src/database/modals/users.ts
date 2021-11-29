@@ -26,11 +26,11 @@ const UserSchema = new mongoose.Schema({
     default: 'none',
   },
   isVerified: {
-    type: String,
+    type: Boolean,
     default: false,
   },
   isGuider: {
-    type: String,
+    type: Boolean,
     default: false,
   },
   bio: {

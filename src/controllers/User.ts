@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable max-len */
 import { UserInputError } from 'apollo-server';
-import { sign } from '../helpers/jwt';
+import { sign, verify } from '../helpers/jwt';
 import { generate, check } from '../helpers/bcrypt';
 import UserService from '../database/services/users';
 import { mailer } from '../helpers/mailer';
@@ -56,6 +56,16 @@ class User {
     }
     exists.token = await sign({ email: exists.email, id: exists._id, role: 'user' });
     return exists;
+  }
+
+  static async verifyEmail(parent:any, { token }:{token:string}, ctx:any) {
+    const email = verify(token);
+    const exist = await UserService.findUser({ email });
+    if (!exist) throw new UserInputError('USER NOT FOUND');
+    if (exist.isVerified === true) throw new UserInputError('USER ALREADY VERIFIED');
+    const verifiedAccount = await UserService.updateUser({ email }, { isVerified: true });
+    verifiedAccount.password = undefined;
+    return verifiedAccount;
   }
 }
 export default User;
