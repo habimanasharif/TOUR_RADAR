@@ -40,7 +40,8 @@ class User {
       email,
     };
 
-    const newAcount = UserService.signUp(newUser);
+    const newAcount = await UserService.signUp(newUser);
+    newAcount.password = undefined;
 
     return newAcount;
   }
@@ -54,7 +55,9 @@ class User {
     if (!match) {
       throw new UserInputError('INCORRECT PASSWORD');
     }
+    if (exists.isVerified === false) throw new UserInputError('Your email is not verified');
     exists.token = await sign({ email: exists.email, id: exists._id, role: 'user' });
+    exists.password = undefined;
     return exists;
   }
 
