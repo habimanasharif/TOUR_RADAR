@@ -5,7 +5,6 @@ import { typeDefs } from './typeDefs';
 import resolvers from './resolvers';
 
 dbConnect();
-
 const server = new ApolloServer({ typeDefs, resolvers });
 
 server.listen().then(({ url }) => {

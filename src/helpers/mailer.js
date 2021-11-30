@@ -1,15 +1,18 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/prefer-default-export */
+/* eslint-disable max-len */
 import ejs from 'ejs';
 import path from 'path';
 import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
+import config from '../config';
 
 const CLIENT_ID = '917001364111-qjg53ib2jg4vm0fo8dfjg674but11pp7.apps.googleusercontent.com';
 const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 const REFRESH_TOKEN = '1//04COnccSd9MqSCgYIARAAGAQSNwF-L9IrKyqwEia0kjr-IKoMbfBdxS2YJ4S-CrV5rNDKydZdyZI60_RA_7XUIv4QaqlElUBJmb0';
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+const oAuth2Client = new google.auth.OAuth2(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URI);
+oAuth2Client.setCredentials({ refresh_token: config.REFRESH_TOKEN });
 
 const mailer = async (emailToSend) => {
   try {
@@ -20,9 +23,9 @@ const mailer = async (emailToSend) => {
         auth: {
           type: 'OAUTH2',
           user: 'hdidiersharif@gmail.com',
-          clientId: CLIENT_ID,
-          clientSecret: CLIENT_SECRET,
-          refreshToken: REFRESH_TOKEN,
+          clientId: config.CLIENT_ID,
+          clientSecret: config.CLIENT_SECRET,
+          refreshToken: config.REFRESH_TOKEN,
           accessToken
         }
 

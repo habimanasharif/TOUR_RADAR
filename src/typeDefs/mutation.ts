@@ -24,6 +24,11 @@ const mutation = gql`
       password:String
       account:String
     ):User
+    #verify email mutation
+    verifyEmail(
+      token:String
+    ):User
+
   
   }
 `;
