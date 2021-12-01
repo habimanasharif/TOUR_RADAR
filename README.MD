@@ -20,6 +20,9 @@ JWT_SECRET=
 ### User
 - [User Signup](#1-user-signup-mutation)
 - [User LogIn](#2-user-LogIn-mutation)
+- [User Verify Email](#3-user-verify-email-mutation)
+### Admin
+- [Admin Login](#4-admin-login)
 
 ### 1. User SignUp: MUTATION
 
@@ -94,6 +97,52 @@ Response
             "username": "keleva96",
             "email": "wizzysharifivk@gmail.com",
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Indpenp5c2hhcmlmaXZrQGdtYWlsLmNvbSIsImlkIjoiNjE5ZTZjNzRkYjdiMjc3NTU3MGQyODM4Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2Mzc3NzMwMjJ9.CTJmnqpG7TWYSDg8t2QzOkpdRg3rLgZo8n7lfI6t6Is"
+        }
+    }
+}
+```
+### 3. User Verify Email: MUTATION
+Body
+```gql
+mutation exp{
+    verifyEmail(
+        token:"eyJhbGciOiJIUzI1NiJ9.d2l6enlzaGFyaWZpdmtAZ21haWwuY29t.eJG2votBkpx957dAHHhfAoLiJLnVxb6CVU8WyX0jD7E"
+    )
+    { 
+        email
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "verifyEmail": {
+            "email": "wizzysharifivk@gmail.com"
+        }
+    }
+}
+```
+### 4. Admin Login
+Body
+```gql
+mutation ex{
+    AdminLogin(
+        username:"admin",
+        password:"admin"
+    ){
+        role
+        token
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "AdminLogin": {
+            "role": "admin",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Mzg4NzY0NjZ9.eUzAxkb3LkpOxNKXUgNAQdgTKR9oDNV8N7kr33IQv-4"
         }
     }
 }

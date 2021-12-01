@@ -1,12 +1,10 @@
-const { gql } = require("apollo-server");
+import { gql } from 'apollo-server';
 
 const query = gql`
   type Query {
     users:[User]
-    Admins:[Admin]
+    
   }
 `;
 
-export {
-  query,
-};
+export default query;

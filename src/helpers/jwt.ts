@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import jwt from 'jsonwebtoken';
 import config from '../config';
 
