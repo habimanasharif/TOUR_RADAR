@@ -1,4 +1,5 @@
-const { gql } = require("apollo-server");
+/* eslint-disable import/prefer-default-export */
+import { gql } from 'apollo-server';
 
 const mutation = gql`
   type Mutation {
@@ -29,6 +30,12 @@ const mutation = gql`
     password:String
   ):Admin
 
+    #verify email mutation
+    verifyEmail(
+      token:String
+    ):User
+
+  
   }
 `;
 

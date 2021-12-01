@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 const userType = gql`
   type User {
@@ -16,6 +16,4 @@ const userType = gql`
   createdAt:String
   }
 `;
-export {
-  userType,
-};
+export default userType;

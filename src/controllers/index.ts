@@ -1,4 +1,4 @@
-import  {User} from "./User";
+import  User from "./User";
 import {Admin} from "./Admin"
 export {
 User,
