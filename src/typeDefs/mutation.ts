@@ -2,21 +2,26 @@
 import { gql } from 'apollo-server';
 
 const mutation = gql`
+input user {
+  firstname: String!
+  lastname:String!
+  username:String!
+  password:String!
+  email: String!
+  profilePicture:String
+  isVerified:String
+  role:String
+  bio:String
+  website:String
+}
+scalar Upload
+
   type Mutation {
     #all mutations
       #user mutation
+      
     signUp(
-      firstname: String
-    lastname:String
-    username:String
-    password: String
-    email: String
-    profilePicture:String
-    isVerified:String
-    role:String
-    bio:String
-    website:String
-  createdAt:String
+      input:user
     ):User
     #logIn mutation
     logIn(
@@ -34,6 +39,9 @@ const mutation = gql`
     verifyEmail(
       token:String
     ):User
+    verifyGuider(
+     cirtificate:Upload!,
+    ):Verification
 
   
   }

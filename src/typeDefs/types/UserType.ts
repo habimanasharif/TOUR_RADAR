@@ -15,5 +15,12 @@ const userType = gql`
     website:String
   createdAt:String
   }
+  type Verification {
+    message: String
+    username: String
+    email:String
+    cirtificate: String
+
+  }
 `;
 export default userType;

@@ -21,8 +21,12 @@ JWT_SECRET=
 - [User Signup](#1-user-signup-mutation)
 - [User LogIn](#2-user-LogIn-mutation)
 - [User Verify Email](#3-user-verify-email-mutation)
+<<<<<<< HEAD
 ### Admin
 - [Admin Login](#4-admin-login)
+=======
+- [User Request IsGuider Verification](#4-user-request-isguider-verification-mutation)
+>>>>>>> finishes verify guider
 
 ### 1. User SignUp: MUTATION
 
@@ -134,7 +138,6 @@ mutation ex{
         role
         token
     }
-}
 ```
 Response
 ```json
@@ -143,6 +146,27 @@ Response
         "AdminLogin": {
             "role": "admin",
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Mzg4NzY0NjZ9.eUzAxkb3LkpOxNKXUgNAQdgTKR9oDNV8N7kr33IQv-4"
+        }
+    }
+}
+```
+### 4. User Request IsGuider Verification: MUTATION
+Body
+```gql
+mutation ex{
+    verifyGuider(
+        cirtificate:"/home/ty-flex/Downloads/m8c20gchf7231.jpg"
+    ){
+        message
+    }
+}
+```
+
+```json
+  {
+    "data": {
+        "verifyGuider": {
+            "message": "verification successfully requested"
         }
     }
 }
