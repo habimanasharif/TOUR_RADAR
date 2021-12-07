@@ -24,6 +24,12 @@ const mutation = gql`
       password:String
       account:String
     ):User
+  #AdminLogin mutation
+  AdminLogin(
+    username:String
+    password:String
+  ):Admin
+
     #verify email mutation
     verifyEmail(
       token:String

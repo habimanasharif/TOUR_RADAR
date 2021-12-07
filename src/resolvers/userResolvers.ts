@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import User from '../controllers';
+import { User } from '../controllers';
 
 const userResolvers = {
   Query: {
