@@ -21,7 +21,7 @@ class UserService {
 
   static async updateUser(filter:any, update:any) {
     try {
-      return await Users.findOneAndUpdate(filter, update, { new: true });
+      return await Users.findOneAndUpdate(filter, update, { new:true });
     } catch (error) {
       throw error;
     }

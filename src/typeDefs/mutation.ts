@@ -34,7 +34,14 @@ const mutation = gql`
     verifyEmail(
       token:String
     ):User
-
+ #updating#updating user mutation
+ updateUser(
+   firstname:String
+   lastname:String
+   bio:String
+   profilepicture:String
+   email:String
+ ):User
   
   }
 `;

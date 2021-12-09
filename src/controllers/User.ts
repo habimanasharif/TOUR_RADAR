@@ -70,5 +70,17 @@ class User {
     verifiedAccount.password = undefined;
     return verifiedAccount;
   }
+
+  static async updateUser(parent:any, {
+    firstname, lastname, bio, email
+  }:{firstname:string, lastname:string, bio:string, email:string}, ctx:any) {
+    const userExists = await UserService.findUser({ email });
+    if (!userExists) {
+      throw new UserInputError("USER DOES'NT EXIST");
+    }
+    const update = await UserService.updateUser({ email }, { bio });
+
+    return update;
+  }
 }
 export default User;
