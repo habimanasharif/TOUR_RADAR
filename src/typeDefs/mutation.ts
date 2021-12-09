@@ -62,6 +62,15 @@ scalar Upload
    likePost(
      postId:String!
    ):Message
+ #updating#updating user mutation
+ updateUser(
+   firstname:String
+   lastname:String
+   bio:String
+   profilepicture:String
+   email:String
+ ):User
+  
   }
  
 `;
