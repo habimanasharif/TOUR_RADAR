@@ -6,7 +6,9 @@
 /* eslint-disable indent */
 import { UserInputError } from 'apollo-server';
 import { sign } from '../helpers/jwt';
+import { isAdmin } from '../middleware/authorization';
 import confing from '../config';
+import VerifyGuiderService from '../database/services/verifyGuider';
 
 class Admin {
 static async AdminLogin(parent:any, { password, username }:{password:string, username:string}, ctx:any) {
@@ -18,6 +20,12 @@ static async AdminLogin(parent:any, { password, username }:{password:string, use
     const token = await sign({ role: 'admin' });
 
     return { token, role: 'admin' };
+}
+
+static async Fetchverifications(parent:any, args:any, ctx:any) {
+  const role = await isAdmin(ctx);
+  const requests = VerifyGuiderService.fetchrequests();
+  return requests;
 }
 }
 export { Admin };

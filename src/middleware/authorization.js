@@ -17,9 +17,22 @@ const decodeToken = async (ctx) => {
   }
 };
 
-const isUser = async (ctx) => {
-  const user = await decodeToken(ctx);
-  if (user.role != 'user') throw new AuthenticationError('AUTHENTICATION ERROR');
-  return user.id;
+export const isUser = async (ctx) => {
+  try {
+    const user = await decodeToken(ctx);
+    if (user.role != 'user') throw new AuthenticationError('AUTHENTICATION ERROR');
+    return user.id;
+  } catch (error) {
+    throw error;
+  }
 };
-export { isUser };
+
+export const isAdmin = async (ctx) => {
+  try {
+    const admin = await decodeToken(ctx);
+    if (admin.role != 'admin') throw new AuthenticationError('AUTHENTICATION ERROR');
+    return admin.role;
+  } catch (error) {
+    throw error;
+  }
+};

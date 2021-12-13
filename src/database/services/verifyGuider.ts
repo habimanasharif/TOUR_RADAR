@@ -18,5 +18,13 @@ class VerifyGuider {
       throw error;
     }
   }
+
+  static async fetchrequests() {
+    try {
+      return await verifyGuider.find().sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 export default VerifyGuider;

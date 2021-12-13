@@ -4,7 +4,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable max-len */
 import { UserInputError, AuthenticationError } from 'apollo-server';
-import { Auth } from 'googleapis';
 import { sign, verify } from '../helpers/jwt';
 import { generate, check } from '../helpers/bcrypt';
 import UserService from '../database/services/users';
@@ -82,9 +81,9 @@ class User {
     if ((ext !== 'jpg') && (ext !== 'JPG') && ext !== 'png' && ext !== 'jpeg' && ext !== 'JPEG') { throw new UserInputError('UNSUPPORTED FILE'); }
     const response = await uploader(cirtificate);
     const request = await VerifyGuiderService.findrequest({ email: exist.email });
-    // if (request) {
-    //   throw new Error('REQUEST ALREADY EXIST');
-    // }
+    if (request) {
+      throw new Error('REQUEST ALREADY EXIST');
+    }
     const guider = {
       firstname: exist.firstname,
       lastname: exist.lastname,
