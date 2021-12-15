@@ -42,8 +42,11 @@ scalar Upload
     verifyGuider(
      cirtificate:Upload!,
     ):Verification
-
-  
+    
+    adminverify(
+      email:String!
+    ):User
+   
   }
 `;
 
