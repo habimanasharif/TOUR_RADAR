@@ -9,9 +9,10 @@ import { sign } from '../helpers/jwt';
 import { isAdmin } from '../middleware/authorization';
 import confing from '../config';
 import VerifyGuiderService from '../database/services/verifyGuider';
+import UserService from '../database/services/users';
 
 class Admin {
-static async AdminLogin(parent:any, { password, username }:{password:string, username:string}, ctx:any) {
+static async AdminLogin(_parent:any, { password, username }:{password:string, username:string}, _ctx:any) {
     if (username !== confing.username || password !== confing.password)
 
     // eslint-disable-next-line nonblock-statement-body-position
@@ -22,10 +23,19 @@ static async AdminLogin(parent:any, { password, username }:{password:string, use
     return { token, role: 'admin' };
 }
 
-static async Fetchverifications(parent:any, args:any, ctx:any) {
+static async Fetchverifications(_parent:any, _args:any, ctx:any) {
   const role = await isAdmin(ctx);
   const requests = VerifyGuiderService.fetchrequests();
   return requests;
+}
+
+static async verifyGuider(_parent:any, { email }:{email:string}, ctx:any) {
+  const role = await isAdmin(ctx);
+  const user = await UserService.findUser({ email });
+  if (!user) throw new UserInputError('USER NOT FOUND');
+  if (user.isVerified !== true) throw new UserInputError('USER NOT VERIFIED');
+  const updateUser = UserService.updateUser({ email }, { isGuider: true });
+  return updateUser;
 }
 }
 export { Admin };

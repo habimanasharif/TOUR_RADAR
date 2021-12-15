@@ -25,6 +25,7 @@ JWT_SECRET=
 ### Admin
 - [Admin Login](#4-admin-login)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
+- [Admin VERIFY USER ](#8-admin-verify-user-mutation)
 
 
 ### 1. User SignUp: MUTATION
@@ -55,6 +56,7 @@ mutation Example {
   createdAt
   }
 }
+```
 
 
 Response
@@ -170,7 +172,7 @@ mutation ex{
     }
 }
 ```
-# 7. Admin Fetch Verification Request: Query
+### 7. Admin Fetch Verification Request: Query
  Body
  ```gql
  query ex {
@@ -218,6 +220,37 @@ Response
             },
             
         ]
+    }
+}
+```
+### 8. Admin Verify User: Mutation
+Body
+```gql
+mutation ex{
+    adminverify(
+    email:"wizzysharifivk@gmail.com"
+    ){
+     username,
+     email,
+     isGuider,
+     firstname,
+     lastname,
+     isVerified
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "adminverify": {
+            "username": "josue",
+            "email": "wizzysharifivk@gmail.com",
+            "isGuider": "true",
+            "firstname": "Igiraneza",
+            "lastname": "Josue",
+            "isVerified": "true"
+        }
     }
 }
 ```
