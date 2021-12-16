@@ -21,8 +21,12 @@ JWT_SECRET=
 - [User Signup](#1-user-signup-mutation)
 - [User LogIn](#2-user-LogIn-mutation)
 - [User Verify Email](#3-user-verify-email-mutation)
+- [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
 ### Admin
 - [Admin Login](#4-admin-login)
+- [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
+- [Admin VERIFY USER ](#8-admin-verify-user-mutation)
+
 
 ### 1. User SignUp: MUTATION
 
@@ -52,6 +56,7 @@ mutation Example {
   createdAt
   }
 }
+```
 
 
 Response
@@ -134,7 +139,6 @@ mutation ex{
         role
         token
     }
-}
 ```
 Response
 ```json
@@ -143,6 +147,109 @@ Response
         "AdminLogin": {
             "role": "admin",
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Mzg4NzY0NjZ9.eUzAxkb3LkpOxNKXUgNAQdgTKR9oDNV8N7kr33IQv-4"
+        }
+    }
+}
+```
+### 5. User Request IsGuider Verification: MUTATION
+Body
+```gql
+mutation ex{
+    verifyGuider(
+        cirtificate:"/home/ty-flex/Downloads/m8c20gchf7231.jpg"
+    ){
+        message
+    }
+}
+```
+
+```json
+  {
+    "data": {
+        "verifyGuider": {
+            "message": "verification successfully requested"
+        }
+    }
+}
+```
+### 7. Admin Fetch Verification Request: Query
+ Body
+ ```gql
+ query ex {
+    verifications{
+        cirtificate,
+        email,
+        username,
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "verifications": [
+            {
+                "cirtificate": "https://res.cloudinary.com/trio-code/image/upload/v1639554589/f1ktspfks8qwytm3bpjd.jpg",
+                "email": "wizzysharifivk@gmail.com",
+                "username": "josue"
+            },
+            {
+                "cirtificate": "https://res.cloudinary.com/trio-code/image/upload/v1639437711/jy0yghkwk4mxu6cek36d.jpg",
+                "email": "wizzysharifivk@gmail.com",
+                "username": "josue"
+            },
+            {
+                "cirtificate": "https://res.cloudinary.com/trio-code/image/upload/v1639317929/hrul2pnjiajjrwtw8urw.jpg",
+                "email": "wizzysharifivk@gmail.com",
+                "username": "josue"
+            },
+            {
+                "cirtificate": "https://res.cloudinary.com/trio-code/image/upload/v1639317303/b2bpvcxk4iiedomuw19k.jpg",
+                "email": "wizzysharifivk@gmail.com",
+                "username": "josue"
+            },
+            {
+                "cirtificate": "https://res.cloudinary.com/trio-code/image/upload/v1639316082/ucoawsw80irlauvqe7ga.jpg",
+                "email": "wizzysharifivk@gmail.com",
+                "username": "josue"
+            },
+            {
+                "cirtificate": "https://res.cloudinary.com/trio-code/image/upload/v1639309047/ycmeodsnqamcpc80xykz.jpg",
+                "email": "wizzysharifivk@gmail.com",
+                "username": "josue"
+            },
+            
+        ]
+    }
+}
+```
+### 8. Admin Verify User: Mutation
+Body
+```gql
+mutation ex{
+    adminverify(
+    email:"wizzysharifivk@gmail.com"
+    ){
+     username,
+     email,
+     isGuider,
+     firstname,
+     lastname,
+     isVerified
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "adminverify": {
+            "username": "josue",
+            "email": "wizzysharifivk@gmail.com",
+            "isGuider": "true",
+            "firstname": "Igiraneza",
+            "lastname": "Josue",
+            "isVerified": "true"
         }
     }
 }

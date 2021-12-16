@@ -1,28 +1,30 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable import/extensions */
 /* eslint-disable max-len */
-import { UserInputError } from 'apollo-server';
+import { UserInputError, AuthenticationError } from 'apollo-server';
 import { sign, verify } from '../helpers/jwt';
 import { generate, check } from '../helpers/bcrypt';
 import UserService from '../database/services/users';
+import VerifyGuiderService from '../database/services/verifyGuider';
 import { mailer } from '../helpers/mailer';
 import * as Validations from '../middleware/validation/user';
 import config from '../config';
+import { isUser } from '../middleware/authorization';
+import uploader from '../helpers/storage';
+import extension from '../helpers/extention';
 
 class User {
-  static async signUp(parent:any, {
-    firstname, lastname, username, password, email, role
-  }:
-    {firstname:string, lastname:string, username:string, password:string, email:string, role:string},
-  ctx:any) {
+  static async signUp(parent:any, { input }:{input:any}, ctx:any) {
+    const {
+      firstname, lastname, username, password, email, role
+    } = input;
     const exists = await UserService.findUser({ $or: [{ email }, { username }] });
     if (!exists) {
       throw new UserInputError('USER EXISTS ERROR');
     }
-    Validations.signUp({
-      firstname, lastname, username, password, email
-    });
+    Validations.signUp(input);
     await mailer(['sign-up', {
       email,
       firstname,
@@ -62,7 +64,7 @@ class User {
   }
 
   static async verifyEmail(parent:any, { token }:{token:string}, ctx:any) {
-    const email = verify(token);
+    const email = await verify(token);
     const exist = await UserService.findUser({ email });
     if (!exist) throw new UserInputError('USER NOT FOUND');
     if (exist.isVerified === true) throw new UserInputError('USER ALREADY VERIFIED');
@@ -71,16 +73,44 @@ class User {
     return verifiedAccount;
   }
 
-  static async updateUser(parent:any, {
-    firstname, lastname, bio, email
-  }:{firstname:string, lastname:string, bio:string, email:string}, ctx:any) {
-    const userExists = await UserService.findUser({ email });
+  static async updateUser(parent:any, { input }:{input:any}, ctx:any) {
+    const user = await isUser(ctx);
+    const userExists = await UserService.findUser({ _id: user });
     if (!userExists) {
       throw new UserInputError("USER DOES'NT EXIST");
     }
-    const update = await UserService.updateUser({ email }, { bio });
+    if (userExists.isVerified === false) throw new UserInputError('User Is Not verified');
+    Validations.update(input);
+    const update = await UserService.updateUser({ _id: user }, input);
 
     return update;
+  }
+
+  static async verifyGuider(parent:any, { cirtificate }:{cirtificate:string}, ctx:any) {
+    const user = await isUser(ctx);
+    const ext = extension(cirtificate);
+    const exist = await UserService.findUser({ _id: user });
+    if (!exist) throw new AuthenticationError('AUTHENTICATION ERROR');
+    if ((ext !== 'jpg') && (ext !== 'JPG') && ext !== 'png' && ext !== 'jpeg' && ext !== 'JPEG') { throw new UserInputError('UNSUPPORTED FILE'); }
+    const response = await uploader(cirtificate);
+    const request = await VerifyGuiderService.findrequest({ email: exist.email });
+    if (request) {
+      throw new Error('REQUEST ALREADY EXIST');
+    }
+    const guider = {
+      firstname: exist.firstname,
+      lastname: exist.lastname,
+      username: exist.username,
+      email: exist.email,
+      profilePicture: exist.profilePicture,
+      bio: exist.bio,
+      socials: exist.socials,
+      cirtificate: response.secure_url
+
+    };
+    const verifyGuider = await VerifyGuiderService.requestVerification(guider);
+    verifyGuider.message = 'verification successfully requested';
+    return verifyGuider;
   }
 }
 export default User;

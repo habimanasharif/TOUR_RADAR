@@ -11,9 +11,11 @@ const userType = gql`
     isVerified:String
     role:String
     bio:String
+    isGuider:String
     token:String
     website:String
   createdAt:String
   }
+  
 `;
 export default userType;
