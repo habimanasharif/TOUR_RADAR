@@ -2,9 +2,11 @@
 /* eslint-disable import/extensions */
 import query from './query';
 import { mutation } from './mutation';
-import { userType, AdminType, verificationType } from './types';
+import {
+  userType, AdminType, verificationType, PostType
+} from './types';
 
-const typeDefs = [query, mutation, userType, AdminType, verificationType];
+const typeDefs = [query, mutation, userType, AdminType, verificationType, PostType];
 
 export {
   typeDefs,
