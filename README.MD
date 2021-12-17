@@ -23,10 +23,11 @@ JWT_SECRET=
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
 ### Admin
-- [Admin Login](#4-admin-login)
+- [Admin Login](#4-admin-login-mutation)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
 - [Admin VERIFY USER ](#8-admin-verify-user-mutation)
-
+### Posts
+- [User Create Post](#9-user-create-post-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -250,6 +251,37 @@ Response
             "firstname": "Igiraneza",
             "lastname": "Josue",
             "isVerified": "true"
+        }
+    }
+}
+```
+### 9. User-Create-Post-mutation
+body
+```gql
+mutation ex{
+    createPost(
+        input:{
+     caption:"To night was lit"
+      location:"Kigali,Rwanda"
+      content:["/home/ty-flex/Downloads/m8c20gchf7231.jpg","/home/ty-flex/Downloads/m8c20gchf7231.jpg","/home/ty-flex/Downloads/m8c20gchf7231.jpg"]
+        }
+    ){
+    content
+    location
+    }
+}
+```
+Response
+``` json
+{
+    "data": {
+        "createPost": {
+            "content": [
+                "https://res.cloudinary.com/trio-code/image/upload/v1639757067/p6muxrurlher5pb2ryak.jpg",
+                "https://res.cloudinary.com/trio-code/image/upload/v1639757077/urqyb3upmgurlz64baou.jpg",
+                "https://res.cloudinary.com/trio-code/image/upload/v1639757082/wfrpe94lfimca37poiup.jpg"
+            ],
+            "location": "Kigali,Rwanda"
         }
     }
 }

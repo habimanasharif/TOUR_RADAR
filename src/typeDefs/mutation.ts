@@ -14,6 +14,11 @@ input user {
   bio:String
   website:String
 }
+input post {
+      caption:String!
+      location:String!
+      content:[String]!
+}
 scalar Upload
 
   type Mutation {
@@ -47,6 +52,9 @@ scalar Upload
       email:String!
     ):User
    
+   createPost(
+    input:post
+   ):Post
   }
 `;
 

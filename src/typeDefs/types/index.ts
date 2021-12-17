@@ -3,9 +3,11 @@
 import userType from './UserType';
 import { AdminType } from './AdminType';
 import verificationType from './verificationType';
+import PostType from './postType';
 
 export {
   userType,
   AdminType,
-  verificationType
+  verificationType,
+  PostType
 };
