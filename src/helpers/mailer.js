@@ -7,7 +7,6 @@ import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
 import config from '../config';
 
-
 const oAuth2Client = new google.auth.OAuth2(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URI);
 oAuth2Client.setCredentials({ refresh_token: config.REFRESH_TOKEN });
 

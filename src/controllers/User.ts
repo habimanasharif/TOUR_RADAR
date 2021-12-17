@@ -21,7 +21,7 @@ class User {
       firstname, lastname, username, password, email, role
     } = input;
     const exists = await UserService.findUser({ $or: [{ email }, { username }] });
-    if (!exists) {
+    if (exists) {
       throw new UserInputError('USER EXISTS ERROR');
     }
     Validations.signUp(input);
@@ -64,7 +64,7 @@ class User {
   }
 
   static async verifyEmail(parent:any, { token }:{token:string}, ctx:any) {
-    const email = verify(token);
+    const email = await verify(token);
     const exist = await UserService.findUser({ email });
     if (!exist) throw new UserInputError('USER NOT FOUND');
     if (exist.isVerified === true) throw new UserInputError('USER ALREADY VERIFIED');

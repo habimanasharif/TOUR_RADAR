@@ -35,13 +35,13 @@ Body
 ```gql
 mutation Example {
   signUp(
-      firstname:"Habimana",
+    input:{ firstname:"Habimana",
       lastname:"sharif"  ,
-      username:"ty_flex" ,
-      password:"shithole",
-      email:"hdidiersharif@gmail.com"
+      username:"sharif" ,
+      password:"test123",
+      email:"wizzysharifivk@gmail.com"
 
-
+}
   ){
      firstname
     lastname
