@@ -22,13 +22,14 @@ JWT_SECRET=
 - [User LogIn](#2-user-LogIn-mutation)
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
-- [User Fetch All Posts](#10-user-fetch-posts-query)
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
 - [Admin VERIFY USER ](#8-admin-verify-user-mutation)
 ### Posts
 - [User Create Post](#9-user-create-post-mutation)
+- [User Fetch All Posts](#10-user-fetch-posts-query)
+- [User Delete Own Post](#11-user-delete-own-posts-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -304,10 +305,13 @@ uery ex{
 ```
 Response
 ```json
-"data": {
+{
+    "data": {
         "posts": [
             {
+                "_id": "61bcbe59c3cc2b437cfcbb26",
                 "owner": {
+                    "_id": "61bbb4a966cdd3c3a93e4bee",
                     "username": "sharif",
                     "profilePicture": "none"
                 },
@@ -319,7 +323,9 @@ Response
                 "location": "Kigali,Rwanda"
             },
             {
+                "_id": "61bcb51be3202417a130358a",
                 "owner": {
+                    "_id": "61bbb4a966cdd3c3a93e4bee",
                     "username": "sharif",
                     "profilePicture": "none"
                 },
@@ -331,6 +337,26 @@ Response
                 "location": "Kigali,Rwanda"
             }
         ]
+    }
+}
+```
+### 11. User Delete Own Posts-mutation
+Body
+```gql
+mutation ex{
+    deletePost(id:"61bcbe59c3cc2b437cfcbb26")
+    {
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "deletePost": {
+            "message": " Post Deleted Successfully"
+        }
     }
 }
 ```

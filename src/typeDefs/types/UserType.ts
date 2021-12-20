@@ -2,6 +2,7 @@ import { gql } from 'apollo-server';
 
 const userType = gql`
   type User {
+    _id:String
     firstname: String
     lastname:String
     username:String

@@ -22,6 +22,22 @@ class PostService {
       throw error;
     }
   }
+
+  static async deletePost(id:any) {
+    try {
+      return await Posts.deleteOne({ _id: id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async fetchSinglePost(id:any) {
+    try {
+      return await Posts.findOne({ _id: id });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PostService;

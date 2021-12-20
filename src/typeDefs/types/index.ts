@@ -4,10 +4,12 @@ import userType from './UserType';
 import { AdminType } from './AdminType';
 import verificationType from './verificationType';
 import PostType from './postType';
+import MessageType from './messageType';
 
 export {
   userType,
   AdminType,
   verificationType,
-  PostType
+  PostType,
+  MessageType,
 };

@@ -55,6 +55,10 @@ scalar Upload
    createPost(
     input:post
    ):Post
+
+   deletePost(
+     id:String
+   ):Message
   }
 `;
 
