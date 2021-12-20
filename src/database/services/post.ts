@@ -10,6 +10,18 @@ class PostService {
       throw error;
     }
   }
+
+  static async fetchPost(page:number, limit:number) {
+    try {
+      return await Posts.find()
+        .sort({ createdAt: -1 })
+        .populate('owner', ['username', 'profilePicture'])
+        .skip((page - 1) * limit)
+        .limit(limit);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PostService;

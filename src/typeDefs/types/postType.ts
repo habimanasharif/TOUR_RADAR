@@ -1,11 +1,10 @@
 import { gql } from 'apollo-server';
 
 const PostType = gql`
-
   type Post {
       caption:String
       createdAt:Int
-      Owner:String
+      owner:User 
       location:String
       content:[String]
   }

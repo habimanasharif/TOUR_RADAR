@@ -22,6 +22,7 @@ JWT_SECRET=
 - [User LogIn](#2-user-LogIn-mutation)
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
+- [User Fetch All Posts](#10-user-fetch-posts-query)
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
@@ -283,6 +284,53 @@ Response
             ],
             "location": "Kigali,Rwanda"
         }
+    }
+}
+```
+
+### 10. User Fetch Posts-Query
+Body
+```gql
+uery ex{
+    posts{
+        owner{
+            username
+            profilePicture
+        }
+        content
+        location
+    }
+}
+```
+Response
+```json
+"data": {
+        "posts": [
+            {
+                "owner": {
+                    "username": "sharif",
+                    "profilePicture": "none"
+                },
+                "content": [
+                    "https://res.cloudinary.com/trio-code/image/upload/v1639759428/ldh1ec3mgreimtgjs5bz.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1639759438/q7uoxylh9ggpdrxn3vg8.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1639759448/kck9alz50cpmvue08iuq.jpg"
+                ],
+                "location": "Kigali,Rwanda"
+            },
+            {
+                "owner": {
+                    "username": "sharif",
+                    "profilePicture": "none"
+                },
+                "content": [
+                    "https://res.cloudinary.com/trio-code/image/upload/v1639757067/p6muxrurlher5pb2ryak.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1639757077/urqyb3upmgurlz64baou.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1639757082/wfrpe94lfimca37poiup.jpg"
+                ],
+                "location": "Kigali,Rwanda"
+            }
+        ]
     }
 }
 ```

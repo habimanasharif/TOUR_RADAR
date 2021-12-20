@@ -29,5 +29,11 @@ class Post {
     const post = await PostService.createPost(input);
     return post;
   }
+
+  static async fetchPost(_parent:any, args:any, ctx:any) {
+    const id = await isUser(ctx);
+    const posts = await PostService.fetchPost(1, 10);
+    return posts;
+  }
 }
 export { Post };
