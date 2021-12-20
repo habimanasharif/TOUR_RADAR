@@ -35,5 +35,14 @@ class Post {
     const posts = await PostService.fetchPost(1, 10);
     return posts;
   }
+
+  static async deletPost(_parent:any, { id }:{id:any}, ctx:any) {
+    const user = await isUser(ctx);
+    const post = await PostService.fetchSinglePost(id);
+    if (!post) throw new UserInputError('Post Not Available');
+    if (post.owner !== user) throw new UserInputError('You are not allowed to delete  this post');
+    const posts = await PostService.deletePost(id);
+    return { message: ' Post Deleted Successfully' };
+  }
 }
 export { Post };
