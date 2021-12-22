@@ -30,6 +30,8 @@ JWT_SECRET=
 - [User Create Post](#9-user-create-post-mutation)
 - [User Fetch All Posts](#10-user-fetch-posts-query)
 - [User Delete Own Post](#11-user-delete-own-posts-mutation)
+### Likes
+- [User Like Post](#12-user-like-post-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -292,14 +294,24 @@ Response
 ### 10. User Fetch Posts-Query
 Body
 ```gql
-uery ex{
+query ex{
     posts{
+        _id
         owner{
+            _id
             username
             profilePicture
         }
+        likes{
+                username
+                profilePicture
+          
+        }
+        isLiked
+        likesNo
         content
         location
+        createdAt
     }
 }
 ```
@@ -309,32 +321,35 @@ Response
     "data": {
         "posts": [
             {
-                "_id": "61bcbe59c3cc2b437cfcbb26",
+                "_id": "61c325c31b0cf98eda97b771",
                 "owner": {
                     "_id": "61bbb4a966cdd3c3a93e4bee",
                     "username": "sharif",
                     "profilePicture": "none"
                 },
-                "content": [
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639759428/ldh1ec3mgreimtgjs5bz.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639759438/q7uoxylh9ggpdrxn3vg8.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639759448/kck9alz50cpmvue08iuq.jpg"
+                "likes": [
+                    {
+                        "username": "sharif",
+                        "profilePicture": "none"
+                    },
+                    {
+                        "username": "keleva",
+                        "profilePicture": "none"
+                    },
+                    {
+                        "username": "keleva",
+                        "profilePicture": "none"
+                    }
                 ],
-                "location": "Kigali,Rwanda"
-            },
-            {
-                "_id": "61bcb51be3202417a130358a",
-                "owner": {
-                    "_id": "61bbb4a966cdd3c3a93e4bee",
-                    "username": "sharif",
-                    "profilePicture": "none"
-                },
+                "isLiked": true,
+                "likesNo": 3,
                 "content": [
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639757067/p6muxrurlher5pb2ryak.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639757077/urqyb3upmgurlz64baou.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639757082/wfrpe94lfimca37poiup.jpg"
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640179116/wok5mebmxzw9t5nrhfhi.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640179129/r1hf2hw17mfymhk8caud.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640179138/fq4jc71gwsfruv813cu6.jpg"
                 ],
-                "location": "Kigali,Rwanda"
+                "location": "Kigali,Rwanda",
+                "createdAt": 1640179139997
             }
         ]
     }
@@ -356,6 +371,25 @@ Response
     "data": {
         "deletePost": {
             "message": " Post Deleted Successfully"
+        }
+    }
+}
+```
+### 12 User Like Post-Mutation
+Body
+```gql
+mutation ex{
+    likePost(postId:"61c325c31b0cf98eda97b771"){
+message
+}
+}
+```
+Response
+```json
+{
+    "data": {
+        "likePost": {
+            "message": " Post liked Successfully"
         }
     }
 }

@@ -53,13 +53,17 @@ scalar Upload
     ):User
    
    createPost(
-    input:post
+    input:post!
    ):Post
 
    deletePost(
-     id:String
+     id:String!
+   ):Message
+   likePost(
+     postId:String!
    ):Message
   }
+ 
 `;
 
 export {

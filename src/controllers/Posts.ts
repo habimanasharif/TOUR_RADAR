@@ -7,6 +7,8 @@
 import { UserInputError } from 'apollo-server';
 import PostService from '../database/services/post';
 import UserService from '../database/services/users';
+import LikeService from '../database/services/like';
+import { allPostsIterator } from '../helpers/iterator';
 import { isUser } from '../middleware/authorization';
 import imageArray from '../helpers/imageArray';
 import extension from '../helpers/extention';
@@ -27,22 +29,40 @@ class Post {
     const images = await imageArray(input.content);
     input.content = images;
     const post = await PostService.createPost(input);
+    const like = {
+      post: post._id,
+      likes: []
+    };
+    await LikeService.createLike(like);
     return post;
   }
 
   static async fetchPost(_parent:any, args:any, ctx:any) {
     const id = await isUser(ctx);
-    const posts = await PostService.fetchPost(1, 10);
+    let posts = await PostService.fetchPost(1, 10);
+    posts = await allPostsIterator(id, posts);
     return posts;
   }
 
-  static async deletPost(_parent:any, { id }:{id:any}, ctx:any) {
+  static async deletPost(parent:any, { id }:{id:any}, ctx:any) {
     const user = await isUser(ctx);
     const post = await PostService.fetchSinglePost(id);
     if (!post) throw new UserInputError('Post Not Available');
     if (post.owner !== user) throw new UserInputError('You are not allowed to delete  this post');
     const posts = await PostService.deletePost(id);
     return { message: ' Post Deleted Successfully' };
+  }
+
+  static async likePost(parent:any, { postId }:{postId:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const post = await PostService.fetchSinglePost(postId);
+    const user = await UserService.findUser({ _id: id });
+    if (!user) throw new UserInputError('User Not found');
+    if (!post) throw new UserInputError('Post Not Found');
+    const likeExist = await LikeService.findLike(id, post);
+    if (likeExist.length > 0) throw new UserInputError('You Can not like Post Twice');
+    await LikeService.updateLikes({ post: postId }, id);
+    return { message: ' Post liked Successfully' };
   }
 }
 export { Post };
