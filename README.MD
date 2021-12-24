@@ -37,6 +37,7 @@ JWT_SECRET=
 
 ### Follow
 - [User Follow Other User](#14-user-follow-other-user-mutation)
+- [User UnFollow Other User](#15-user-follow-other-user-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -444,6 +445,26 @@ Response
     "data": {
         "likePost": {
             "message": " User Followed Successfully"
+        }
+    }
+}
+```
+### 15 User Follow Other User-mutation
+Body
+```gql
+mutation ex{
+    unfollowUser(userId:"61c5d14e7971b5c9a44d78a8")
+    {
+    message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "likePost": {
+            "message": " User UnFollowed Successfully"
         }
     }
 }

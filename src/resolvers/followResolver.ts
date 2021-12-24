@@ -7,6 +7,7 @@ const followResolvers = {
   },
   Mutation: {
     followUser: (parent:any, args:any, ctx:any) => Follow.follow(parent, args, ctx),
+    unfollowUser: (parent:any, args:any, ctx:any) => Follow.unfollow(parent, args, ctx),
   }
 };
 
