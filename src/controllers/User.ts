@@ -73,6 +73,19 @@ class User {
     return verifiedAccount;
   }
 
+  static async updateUser(parent:any, { input }:{input:any}, ctx:any) {
+    const user = await isUser(ctx);
+    const userExists = await UserService.findUser({ _id: user });
+    if (!userExists) {
+      throw new UserInputError("USER DOES'NT EXIST");
+    }
+    if (userExists.isVerified === false) throw new UserInputError('User Is Not verified');
+    Validations.update(input);
+    const update = await UserService.updateUser({ _id: user }, input);
+
+    return update;
+  }
+
   static async verifyGuider(parent:any, { cirtificate }:{cirtificate:string}, ctx:any) {
     const user = await isUser(ctx);
     const ext = extension(cirtificate);

@@ -10,6 +10,7 @@ const userResolvers = {
     // login
     logIn: (parent:any, args:any, ctx:any) => User.logIn(parent, args, ctx),
     verifyEmail: (parent:any, args:any, ctx:any) => User.verifyEmail(parent, args, ctx),
+    updateUser: (parent:any, args:any, ctx:any) => User.updateUser(parent, args, ctx),
     verifyGuider: (parent:any, args:any, ctx:any) => User.verifyGuider(parent, args, ctx),
   }
 };
