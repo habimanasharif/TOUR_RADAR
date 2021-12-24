@@ -14,6 +14,12 @@ input user {
   bio:String
   website:String
 }
+input update{
+  firstname:String
+  lastname:String
+  bio:String
+  website:String
+}
 input post {
       caption:String!
       location:String!
@@ -44,6 +50,11 @@ scalar Upload
     verifyEmail(
       token:String
     ):User
+ #updating#updating user mutation
+ updateUser(
+   input:update
+ ):User
+  
     verifyGuider(
      cirtificate:Upload!,
     ):Verification
@@ -62,14 +73,6 @@ scalar Upload
    likePost(
      postId:String!
    ):Message
- #updating#updating user mutation
- updateUser(
-   firstname:String
-   lastname:String
-   bio:String
-   profilepicture:String
-   email:String
- ):User
   
   }
  

@@ -22,6 +22,7 @@ JWT_SECRET=
 - [User LogIn](#2-user-LogIn-mutation)
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
+- [User Update Profile](#13-user-update-profile-mutation)
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
@@ -394,3 +395,4 @@ Response
     }
 }
 ```
+### 13 User Update Profile-Mutation

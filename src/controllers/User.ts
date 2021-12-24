@@ -73,6 +73,19 @@ class User {
     return verifiedAccount;
   }
 
+  static async updateUser(parent:any, { input }:{input:any}, ctx:any) {
+    const user = await isUser(ctx);
+    const userExists = await UserService.findUser({ _id: user });
+    if (!userExists) {
+      throw new UserInputError("USER DOES'NT EXIST");
+    }
+    if (userExists.isVerified === false) throw new UserInputError('User Is Not verified');
+    Validations.update(input);
+    const update = await UserService.updateUser({ _id: user }, input);
+
+    return update;
+  }
+
   static async verifyGuider(parent:any, { cirtificate }:{cirtificate:string}, ctx:any) {
     const user = await isUser(ctx);
     const ext = extension(cirtificate);
@@ -98,18 +111,6 @@ class User {
     const verifyGuider = await VerifyGuiderService.requestVerification(guider);
     verifyGuider.message = 'verification successfully requested';
     return verifyGuider;
-  }
-
-  static async updateUser(parent:any, {
-    firstname, lastname, bio, email
-  }:{firstname:string, lastname:string, bio:string, email:string}, ctx:any) {
-    const userExists = await UserService.findUser({ email });
-    if (!userExists) {
-      throw new UserInputError("USER DOES'NT EXIST");
-    }
-    const update = await UserService.updateUser({ email }, { bio });
-
-    return update;
   }
 }
 export default User;
