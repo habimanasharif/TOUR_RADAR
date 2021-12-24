@@ -4,8 +4,11 @@ const PostType = gql`
   type Post {
       _id:String
       caption:String
-      createdAt:Int
-      owner:User 
+      createdAt:Float
+      owner:User
+      isLiked:Boolean
+      likesNo:Int
+      likes:[User]
       location:String
       content:[String]
   }

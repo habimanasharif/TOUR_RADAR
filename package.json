@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
+    "@types/graphql-date": "^1.0.5",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^16.11.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
@@ -42,6 +43,7 @@
     "express": "^4.17.1",
     "googleapis": "^91.0.0",
     "graphql": "^15.6.1",
+    "graphql-date": "^1.0.3",
     "graphql-upload": "^13.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.3",

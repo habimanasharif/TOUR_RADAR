@@ -5,6 +5,7 @@ import { AdminType } from './AdminType';
 import verificationType from './verificationType';
 import PostType from './postType';
 import MessageType from './messageType';
+import LikeType from './likeType';
 
 export {
   userType,
@@ -12,4 +13,5 @@ export {
   verificationType,
   PostType,
   MessageType,
+  LikeType
 };
