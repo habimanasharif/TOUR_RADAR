@@ -73,6 +73,9 @@ scalar Upload
    likePost(
      postId:String!
    ):Message
+  followUser(
+    userId:String!
+  ):Message
   
   }
  
