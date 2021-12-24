@@ -59,6 +59,11 @@ scalar Upload
    deletePost(
      id:String
    ):Message
+  
+  commentPost(
+    postId:String
+    content:String
+  ): Message
   }
 `;
 
