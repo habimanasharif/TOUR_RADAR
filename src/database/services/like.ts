@@ -2,7 +2,7 @@
 /* eslint-disable import/extensions */
 import Likes from '../modals/like';
 
-class PostService {
+class LikeService {
   static async createLike(data:any) {
     try {
       return await Likes.create(data);
@@ -36,4 +36,4 @@ class PostService {
   }
 }
 
-export default PostService;
+export default LikeService;

@@ -23,6 +23,7 @@ JWT_SECRET=
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
 - [User Update Profile](#13-user-update-profile-mutation)
+
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
@@ -33,6 +34,9 @@ JWT_SECRET=
 - [User Delete Own Post](#11-user-delete-own-posts-mutation)
 ### Likes
 - [User Like Post](#12-user-like-post-mutation)
+
+### Follow
+- [User Follow Other User](#14-user-follow-other-user-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -396,3 +400,51 @@ Response
 }
 ```
 ### 13 User Update Profile-Mutation
+Body
+```gql
+mutation ex{
+    updateUser(
+        input:{
+            firstname:"Tyflex"
+            lastname:"umuhuza"
+            bio:"tyflex is cool"
+        }
+        ){
+        bio
+        firstname
+        lastname
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "updateUser": {
+            "bio": "tyflex is cool",
+            "firstname": "Tyflex",
+            "lastname": "umuhuza"
+        }
+    }
+}
+```
+### 14 User Follow Other User-mutation
+Body
+```gql
+mutation ex{
+    followUser(userId:"61c5d14e7971b5c9a44d78a8")
+    {
+    message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "likePost": {
+            "message": " User Followed Successfully"
+        }
+    }
+}
+```
