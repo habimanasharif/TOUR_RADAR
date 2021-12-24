@@ -38,6 +38,15 @@ class PostService {
       throw error;
     }
   }
+
+  static async findOwnerPosts(id:any) {
+    try {
+      return await Posts.find(id)
+        .sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PostService;
