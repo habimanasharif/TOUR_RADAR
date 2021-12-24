@@ -76,6 +76,9 @@ scalar Upload
   followUser(
     userId:String!
   ):Message
+  unfollowUser(
+    userId:String!
+  ):Message
   
   }
  

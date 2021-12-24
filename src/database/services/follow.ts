@@ -34,6 +34,22 @@ class FollowService {
       throw error;
     }
   }
+
+  static async unfollow(filter:any, update:string) {
+    try {
+      return await Follow.findOneAndUpdate(filter, { $pull: { following: update } }, { new: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async removeFollower(filter:any, update:string) {
+    try {
+      return await Follow.findOneAndUpdate(filter, { $pull: { followers: update } }, { new: true });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default FollowService;
