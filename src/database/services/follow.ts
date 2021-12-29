@@ -50,6 +50,24 @@ class FollowService {
       throw error;
     }
   }
+
+  static async findAllFollowers(owner:any) {
+    try {
+      return await Follow.findOne(owner)
+        .populate('followers', ['username', 'profilePicture', 'firstname', 'lastname']);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findAllFollowing(owner:any) {
+    try {
+      return await Follow.findOne(owner)
+        .populate('following', ['username', 'profilePicture', 'firstname', 'lastname']);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default FollowService;

@@ -23,6 +23,7 @@ JWT_SECRET=
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
 - [User Update Profile](#13-user-update-profile-mutation)
+- [User fetch User Profile](#16-user-fetch-user-profile-query)
 
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
@@ -465,6 +466,93 @@ Response
     "data": {
         "likePost": {
             "message": " User UnFollowed Successfully"
+        }
+    }
+}
+```
+### 16 User Fetch User Profile Query
+Body
+```gql
+query ex {
+    userProfile(
+       userId:"61c5ccf3a197b25038a11bad"
+    ){
+      username
+      firstname
+      lastname
+      bio
+      isGuider
+      isFollowing
+      isUser
+      posts{
+          _id
+          location
+          content
+          caption
+          isLiked
+          likesNo
+          createdAt
+          caption
+          likes{
+              username
+              profilePicture
+          }
+      }
+      followers
+      following
+      allFollowers{
+          username
+          profilePicture
+      }
+      allFollowing{
+          username
+          profilePicture
+      }
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "userProfile": {
+            "username": "kelevaj",
+            "firstname": "Umuhuza",
+            "lastname": "Clever",
+            "bio": "**No Biography**",
+            "isGuider": "true",
+            "isFollowing": false,
+            "isUser": true,
+            "posts": [
+                {
+                    "_id": "61cab12e91f1cd2ef9a16f26",
+                    "location": "Kigali,Rwanda",
+                    "content": [
+                        "https://res.cloudinary.com/trio-code/image/upload/v1640673556/bsj5cgor6tybtjynb6go.jpg",
+                        "https://res.cloudinary.com/trio-code/image/upload/v1640673570/wkqwlhhorynijfmad0lr.jpg",
+                        "https://res.cloudinary.com/trio-code/image/upload/v1640673581/ylj4yhjauuxzxw71ovug.jpg"
+                    ],
+                    "caption": "To night was lit",
+                    "isLiked": true,
+                    "likesNo": 1,
+                    "createdAt": 1640673582673,
+                    "likes": [
+                        {
+                            "username": "kelevaj",
+                            "profilePicture": "none"
+                        }
+                    ]
+                }
+            ],
+            "followers": 0,
+            "following": 1,
+            "allFollowers": [],
+            "allFollowing": [
+                {
+                    "username": "sheezy",
+                    "profilePicture": "none"
+                }
+            ]
         }
     }
 }

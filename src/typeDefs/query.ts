@@ -4,6 +4,7 @@ const query = gql`
   type Query {
     verifications:[Verification]
     posts:[Post]
+    userProfile(userId:String):User
     
   }
 `;

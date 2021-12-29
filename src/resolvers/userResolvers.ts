@@ -3,7 +3,7 @@ import { User } from '../controllers';
 
 const userResolvers = {
   Query: {
-  //  users: () => User.fetchUsers(),
+    userProfile: (parent:any, args:any, ctx:any) => User.fetchUserProfile(parent, args, ctx),
   },
   Mutation: {
     signUp: (parent:any, args:any, ctx:any) => User.signUp(parent, args, ctx),

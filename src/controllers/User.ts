@@ -9,12 +9,14 @@ import { generate, check } from '../helpers/bcrypt';
 import UserService from '../database/services/users';
 import FollowService from '../database/services/follow';
 import VerifyGuiderService from '../database/services/verifyGuider';
+import PostService from '../database/services/post';
 import { mailer } from '../helpers/mailer';
 import * as Validations from '../middleware/validation/user';
 import config from '../config';
 import { isUser } from '../middleware/authorization';
 import uploader from '../helpers/storage';
 import extension from '../helpers/extention';
+import { allPostsIterator } from '../helpers/iterator';
 
 class User {
   static async signUp(parent:any, { input }:{input:any}, ctx:any) {
@@ -118,6 +120,27 @@ class User {
     const verifyGuider = await VerifyGuiderService.requestVerification(guider);
     verifyGuider.message = 'verification successfully requested';
     return verifyGuider;
+  }
+
+  static async fetchUserProfile(parent:any, { userId }:{userId:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const user = await UserService.findUser({ _id: userId });
+    if (!user || !user.isVerified) throw new AuthenticationError('No user Found');
+    const follower = await FollowService.findAllFollowers({ owner: userId });
+    const follow = await FollowService.findAllFollowing({ owner: userId });
+    const { followers } = follower;
+    const { following } = follow;
+    const posts = await PostService.findOwnerPosts({ owner: userId });
+    user.totalposts = posts.length;
+    user.followers = followers.length;
+    user.following = following.length;
+    user.allFollowers = followers;
+    user.allFollowing = following;
+    const followed = await FollowService.findFollowing(id, userId);
+    user.isFollowing = (followed.length > 0);
+    user.posts = await allPostsIterator(id, posts);
+    user.isUser = (id === userId);
+    return user;
   }
 }
 export default User;

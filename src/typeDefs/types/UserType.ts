@@ -11,6 +11,14 @@ const userType = gql`
     profilePicture:String
     isVerified:String
     role:String
+    totalposts:Int
+    followers:Int
+    following:Int
+    allFollowers:[User]
+    allFollowing:[User]
+    isFollowing:Boolean
+    posts:[Post]
+    isUser:Boolean
     bio:String
     isGuider:String
     token:String
