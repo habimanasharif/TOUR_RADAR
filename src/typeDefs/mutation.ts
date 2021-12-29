@@ -79,7 +79,9 @@ scalar Upload
   unfollowUser(
     userId:String!
   ):Message
-  
+  updateProfilePicture(
+    picture:String!
+  ):Message
   }
  
 `;

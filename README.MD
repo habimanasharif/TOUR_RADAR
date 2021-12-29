@@ -24,6 +24,7 @@ JWT_SECRET=
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
 - [User Update Profile](#13-user-update-profile-mutation)
 - [User fetch User Profile](#16-user-fetch-user-profile-query)
+- [User Update Profile Picture](#17-user-updtae-profile-picture-mutation)
 
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
@@ -553,6 +554,25 @@ Response
                     "profilePicture": "none"
                 }
             ]
+        }
+    }
+}
+```
+### 17 User Updtae Profile Picture-Mutation
+Body
+```gql
+mutation ex {
+   updateProfilePicture(picture:"/media/ty-flex/files/greencard/CROPPED-_DSC3111.JPG"){
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "updateProfilePicture": {
+            "message": "Profile Picture Update successfully"
         }
     }
 }

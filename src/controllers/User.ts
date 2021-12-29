@@ -1,3 +1,4 @@
+/* eslint-disable lines-between-class-members */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -141,6 +142,17 @@ class User {
     user.posts = await allPostsIterator(id, posts);
     user.isUser = (id === userId);
     return user;
+  }
+
+  static async updateProfilePicture(parent:any, { picture }:{picture:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const user = await UserService.findUser({ id });
+    if (!user || !user.isVerified) throw new AuthenticationError('No user Found');
+    const ext = extension(picture);
+    if ((ext !== 'jpg') && (ext !== 'JPG') && ext !== 'png' && ext !== 'jpeg' && ext !== 'JPEG') { throw new UserInputError('UNSUPPORTED FILE'); }
+    const response = await uploader(picture);
+    await UserService.updateUser({ _id: id }, { profilePicture: response.secure_url });
+    return ({ message: 'Profile Picture Update successfully' });
   }
 }
 export default User;
