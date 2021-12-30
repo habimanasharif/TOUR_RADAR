@@ -12,8 +12,18 @@ Run
 Create a .env file in the root directory and paste in this
 
 ```
-MONGO_URI=
-JWT_SECRET=
+MONGO_URI= 
+JWT_SECRET= 
+CLIENT_ID =
+HOST= 
+CLIENT_SECRET =
+REDIRECT_URI =
+REFRESH_TOKEN =
+username = 
+password = 
+CLOUDINARY_API_KEY = 
+CLOUDINARY_API_SECRET = 
+CLOUDINARY_NAME = 
 ```
 ## Menu
 
