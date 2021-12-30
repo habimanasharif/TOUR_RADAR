@@ -568,7 +568,7 @@ Response
     }
 }
 ```
-### 17 User Updtae Profile Picture-Mutation
+### 17 User Update Profile Picture-Mutation
 Body
 ```gql
 mutation ex {
