@@ -35,6 +35,7 @@ CLOUDINARY_NAME =
 - [User Update Profile](#13-user-update-profile-mutation)
 - [User fetch User Profile](#16-user-fetch-user-profile-query)
 - [User Update Profile Picture](#17-user-updtae-profile-picture-mutation)
+- [User Remove Profile Picture](#19-user-remove-profile-picture-mutation)
 
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
@@ -639,6 +640,25 @@ Response
             ],
             "location": "Kigali,Rwanda",
             "createdAt": 1640673582673
+        }
+    }
+}
+```
+### 19 User Remove Profile Picture-Mutation
+Body
+```gql
+mutation ex {
+    removeProfilePicture{
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "removeProfilePicture": {
+            "message": "Profile Picture Removed successfully"
         }
     }
 }
