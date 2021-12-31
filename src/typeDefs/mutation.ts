@@ -82,6 +82,7 @@ scalar Upload
   updateProfilePicture(
     picture:String!
   ):Message
+  removeProfilePicture:Message
   }
   
     

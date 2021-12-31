@@ -154,5 +154,12 @@ class User {
     await UserService.updateUser({ _id: id }, { profilePicture: response.secure_url });
     return ({ message: 'Profile Picture Update successfully' });
   }
+  static async removeProfilePicture(parent:any, { picture }:{picture:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const user = await UserService.findUser({ id });
+    if (!user || !user.isVerified) throw new AuthenticationError('No user Found');
+    await UserService.updateUser({ _id: id }, { profilePicture: 'none' });
+    return ({ message: 'Profile Picture Removed successfully' });
+  }
 }
 export default User;
