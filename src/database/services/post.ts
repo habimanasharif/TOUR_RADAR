@@ -33,7 +33,7 @@ class PostService {
 
   static async fetchSinglePost(id:any) {
     try {
-      return await Posts.findOne({ _id: id });
+      return await Posts.findOne({ _id: id }).populate('owner', ['username', 'profilePicture']);
     } catch (error) {
       throw error;
     }
