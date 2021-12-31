@@ -154,12 +154,25 @@ class User {
     await UserService.updateUser({ _id: id }, { profilePicture: response.secure_url });
     return ({ message: 'Profile Picture Update successfully' });
   }
-  static async removeProfilePicture(parent:any, { picture }:{picture:string}, ctx:any) {
+  static async removeProfilePicture(parent:any, arg:any, ctx:any) {
     const id = await isUser(ctx);
     const user = await UserService.findUser({ id });
     if (!user || !user.isVerified) throw new AuthenticationError('No user Found');
     await UserService.updateUser({ _id: id }, { profilePicture: 'none' });
     return ({ message: 'Profile Picture Removed successfully' });
+  }
+  static async changePassword(parent:any, { oldPassword, newPassword }:{oldPassword:string, newPassword:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const user = await UserService.findUser({ id });
+    if (!user || !user.isVerified) throw new AuthenticationError('No user Found');
+    const match = check(user.password, oldPassword);
+    if (!match) {
+      throw new UserInputError('INCORRECT PASSWORD');
+    }
+    const hashedpassword = await generate(newPassword);
+    await UserService.updateUser({ _id: id }, { password: hashedpassword });
+
+    return ({ message: 'Password Changed Succefully' });
   }
 }
 export default User;
