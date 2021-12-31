@@ -64,5 +64,21 @@ class Post {
     await LikeService.updateLikes({ post: postId }, id);
     return { message: ' Post liked Successfully' };
   }
+
+  static async fetchSinglePost(parent:any, { postId }:{postId:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const post = await PostService.fetchSinglePost(postId);
+    const user = await UserService.findUser({ _id: id });
+    if (!user) throw new UserInputError('User Not found');
+    if (!post) throw new UserInputError('Post Not Found');
+    const postLikes = await LikeService.findAllLikes({ post: postId });
+    const like = postLikes[0].likes;
+    const likeNo = like.length;
+    const isLiked = await LikeService.findLike(id, postId);
+    post.isLiked = (isLiked.length > 0);
+    post.likesNo = likeNo;
+    post.likes = like;
+    return post;
+  }
 }
 export { Post };

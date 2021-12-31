@@ -5,6 +5,7 @@ const query = gql`
     verifications:[Verification]
     posts:[Post]
     userProfile(userId:String):User
+    fetchSinglePost(postId:String):Post
     
   }
 `;

@@ -83,6 +83,9 @@ scalar Upload
     picture:String!
   ):Message
   }
+  
+    
+  
  
 `;
 

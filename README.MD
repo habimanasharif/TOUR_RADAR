@@ -44,6 +44,7 @@ CLOUDINARY_NAME =
 - [User Create Post](#9-user-create-post-mutation)
 - [User Fetch All Posts](#10-user-fetch-posts-query)
 - [User Delete Own Post](#11-user-delete-own-posts-mutation)
+- [User Fetch Single  Post](#18-user-fetch-single-posts-query)
 ### Likes
 - [User Like Post](#12-user-like-post-mutation)
 
@@ -583,6 +584,61 @@ Response
     "data": {
         "updateProfilePicture": {
             "message": "Profile Picture Update successfully"
+        }
+    }
+}
+```
+### 18 User Fetch Single Posts Query 
+Body
+```gql
+query ex{
+    fetchSinglePost(postId:"61cab12e91f1cd2ef9a16f26"){
+       _id
+        owner{
+            _id
+            username
+            profilePicture
+        }
+        likes{
+                username
+                profilePicture
+          
+        }
+        isLiked
+        likesNo
+        content
+        location
+        createdAt 
+    }
+
+}
+```
+Response
+```json
+{
+    "data": {
+        "fetchSinglePost": {
+            "_id": "61cab12e91f1cd2ef9a16f26",
+            "owner": {
+                "_id": "61c5ccf3a197b25038a11bad",
+                "username": "kelevaj",
+                "profilePicture": "https://res.cloudinary.com/trio-code/image/upload/v1640774007/ngksyqiplwn0afqsby0h.jpg"
+            },
+            "likes": [
+                {
+                    "username": "kelevaj",
+                    "profilePicture": "https://res.cloudinary.com/trio-code/image/upload/v1640774007/ngksyqiplwn0afqsby0h.jpg"
+                }
+            ],
+            "isLiked": true,
+            "likesNo": 1,
+            "content": [
+                "https://res.cloudinary.com/trio-code/image/upload/v1640673556/bsj5cgor6tybtjynb6go.jpg",
+                "https://res.cloudinary.com/trio-code/image/upload/v1640673570/wkqwlhhorynijfmad0lr.jpg",
+                "https://res.cloudinary.com/trio-code/image/upload/v1640673581/ylj4yhjauuxzxw71ovug.jpg"
+            ],
+            "location": "Kigali,Rwanda",
+            "createdAt": 1640673582673
         }
     }
 }
