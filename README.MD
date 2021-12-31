@@ -36,6 +36,7 @@ CLOUDINARY_NAME =
 - [User fetch User Profile](#16-user-fetch-user-profile-query)
 - [User Update Profile Picture](#17-user-updtae-profile-picture-mutation)
 - [User Remove Profile Picture](#19-user-remove-profile-picture-mutation)
+- [User Change Password](#20-user-change-password-mutation)
 
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
@@ -51,7 +52,7 @@ CLOUDINARY_NAME =
 
 ### Follow
 - [User Follow Other User](#14-user-follow-other-user-mutation)
-- [User UnFollow Other User](#15-user-follow-other-user-mutation)
+- [User UnFollow Other User](#15-user-ufollow-other-user-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -659,6 +660,28 @@ Response
     "data": {
         "removeProfilePicture": {
             "message": "Profile Picture Removed successfully"
+        }
+    }
+}
+```
+### 20 User Change Password-Mutation
+Body
+```gql
+mutation ex{
+    changePassword(
+        oldPassword:"123test"
+        newPassword:"test123"
+    ){
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "changePassword": {
+            "message": "Password Changed Succefully"
         }
     }
 }

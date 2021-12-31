@@ -83,6 +83,7 @@ scalar Upload
     picture:String!
   ):Message
   removeProfilePicture:Message
+  changePassword(oldPassword:String,newPassword:String):Message
   }
   
     
