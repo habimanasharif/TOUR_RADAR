@@ -84,7 +84,12 @@ scalar Upload
   updateProfilePicture(
     picture:String!
   ):Message
+  removeProfilePicture:Message
+  changePassword(oldPassword:String,newPassword:String):Message
   }
+  
+    
+  
  
 `;
 exports.mutation = mutation;

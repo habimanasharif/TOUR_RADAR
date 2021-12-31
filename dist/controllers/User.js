@@ -199,5 +199,30 @@ class User {
             return ({ message: 'Profile Picture Update successfully' });
         });
     }
+    static removeProfilePicture(parent, arg, ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = yield (0, authorization_1.isUser)(ctx);
+            const user = yield users_1.default.findUser({ id });
+            if (!user || !user.isVerified)
+                throw new apollo_server_1.AuthenticationError('No user Found');
+            yield users_1.default.updateUser({ _id: id }, { profilePicture: 'none' });
+            return ({ message: 'Profile Picture Removed successfully' });
+        });
+    }
+    static changePassword(parent, { oldPassword, newPassword }, ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = yield (0, authorization_1.isUser)(ctx);
+            const user = yield users_1.default.findUser({ id });
+            if (!user || !user.isVerified)
+                throw new apollo_server_1.AuthenticationError('No user Found');
+            const match = (0, bcrypt_1.check)(user.password, oldPassword);
+            if (!match) {
+                throw new apollo_server_1.UserInputError('INCORRECT PASSWORD');
+            }
+            const hashedpassword = yield (0, bcrypt_1.generate)(newPassword);
+            yield users_1.default.updateUser({ _id: id }, { password: hashedpassword });
+            return ({ message: 'Password Changed Succefully' });
+        });
+    }
 }
 exports.default = User;

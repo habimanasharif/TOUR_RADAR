@@ -6,6 +6,7 @@ const query = (0, apollo_server_1.gql) `
     verifications:[Verification]
     posts:[Post]
     userProfile(userId:String):User
+    fetchSinglePost(postId:String):Post
     
   }
 `;

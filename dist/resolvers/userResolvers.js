@@ -14,7 +14,9 @@ const userResolvers = {
         verifyEmail: (parent, args, ctx) => controllers_1.User.verifyEmail(parent, args, ctx),
         updateUser: (parent, args, ctx) => controllers_1.User.updateUser(parent, args, ctx),
         verifyGuider: (parent, args, ctx) => controllers_1.User.verifyGuider(parent, args, ctx),
-        updateProfilePicture: (parent, args, ctx) => controllers_1.User.updateProfilePicture(parent, args, ctx)
+        updateProfilePicture: (parent, args, ctx) => controllers_1.User.updateProfilePicture(parent, args, ctx),
+        removeProfilePicture: (parent, args, ctx) => controllers_1.User.removeProfilePicture(parent, args, ctx),
+        changePassword: (parent, args, ctx) => controllers_1.User.changePassword(parent, args, ctx),
     }
 };
 exports.default = userResolvers;

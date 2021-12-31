@@ -53,7 +53,7 @@ class PostService {
     static fetchSinglePost(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield post_1.default.findOne({ _id: id });
+                return yield post_1.default.findOne({ _id: id }).populate('owner', ['username', 'profilePicture']);
             }
             catch (error) {
                 throw error;

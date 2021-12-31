@@ -92,5 +92,24 @@ class Post {
             return { message: ' Post liked Successfully' };
         });
     }
+    static fetchSinglePost(parent, { postId }, ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = yield (0, authorization_1.isUser)(ctx);
+            const post = yield post_1.default.fetchSinglePost(postId);
+            const user = yield users_1.default.findUser({ _id: id });
+            if (!user)
+                throw new apollo_server_1.UserInputError('User Not found');
+            if (!post)
+                throw new apollo_server_1.UserInputError('Post Not Found');
+            const postLikes = yield like_1.default.findAllLikes({ post: postId });
+            const like = postLikes[0].likes;
+            const likeNo = like.length;
+            const isLiked = yield like_1.default.findLike(id, postId);
+            post.isLiked = (isLiked.length > 0);
+            post.likesNo = likeNo;
+            post.likes = like;
+            return post;
+        });
+    }
 }
 exports.Post = Post;
