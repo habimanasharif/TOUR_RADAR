@@ -89,6 +89,8 @@ class Post {
     if (!post) throw new UserInputError('Post Not Found');
     const likeExist = await LikeService.findLike(id, post);
     if (likeExist.length < 0) throw new UserInputError('You Can not unlike a non liked PostPost ');
+    await LikeService.removeLikes({ post: postId }, id);
+    return ({ message: 'Post Unliked Successfully' });
   }
 }
 export { Post };

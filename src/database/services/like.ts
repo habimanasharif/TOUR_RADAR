@@ -27,6 +27,14 @@ class LikeService {
     }
   }
 
+  static async removeLikes(filter:any, update:string) {
+    try {
+      return await Likes.findOneAndUpdate(filter, { $pull: { likes: update } }, { new: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async findAllLikes(postId:any) {
     try {
       return await Likes.find(postId).populate('likes', ['username', 'profilePicture', 'firstname', 'lastname']);

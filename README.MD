@@ -49,6 +49,7 @@ CLOUDINARY_NAME =
 - [User Fetch Single  Post](#18-user-fetch-single-posts-query)
 ### Likes
 - [User Like Post](#12-user-like-post-mutation)
+- [User UnLike Post](#21-user-unlike-post-mutation)
 
 ### Follow
 - [User Follow Other User](#14-user-follow-other-user-mutation)
@@ -682,6 +683,25 @@ Response
     "data": {
         "changePassword": {
             "message": "Password Changed Succefully"
+        }
+    }
+}
+```
+### 12 User UnLike Post-Mutation
+Body
+```gql
+mutation ex {
+    unLikePost(postId:"61cab12e91f1cd2ef9a16f26"){
+        message
+    }
+}
+```
+```json
+Response
+{
+    "data": {
+        "unLikePost": {
+            "message": "Post Unliked Successfully"
         }
     }
 }
