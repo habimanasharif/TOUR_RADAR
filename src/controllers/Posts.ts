@@ -80,5 +80,17 @@ class Post {
     post.likes = like;
     return post;
   }
+
+  static async UnLikePost(parent:any, { postId }:{postId:string}, ctx:any) {
+    const id = await isUser(ctx);
+    const post = await PostService.fetchSinglePost(postId);
+    const user = await UserService.findUser({ _id: id });
+    if (!user) throw new UserInputError('User Not found');
+    if (!post) throw new UserInputError('Post Not Found');
+    const likeExist = await LikeService.findLike(id, post);
+    if (likeExist.length < 0) throw new UserInputError('You Can not unlike a non liked PostPost ');
+    await LikeService.removeLikes({ post: postId }, id);
+    return ({ message: 'Post Unliked Successfully' });
+  }
 }
 export { Post };

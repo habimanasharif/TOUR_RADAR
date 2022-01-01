@@ -84,6 +84,7 @@ scalar Upload
   ):Message
   removeProfilePicture:Message
   changePassword(oldPassword:String,newPassword:String):Message
+  unLikePost(postId:String!):Message
   }
   
     
