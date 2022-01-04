@@ -90,6 +90,9 @@ scalar Upload
   removeProfilePicture:Message
   changePassword(oldPassword:String,newPassword:String):Message
   unLikePost(postId:String!):Message
+  searchUser(
+    search:String!
+  ):[User]
   }
   
     

@@ -55,7 +55,9 @@ CLOUDINARY_NAME =
 - [User Follow Other User](#14-user-follow-other-user-mutation)
 - [User UnFollow Other User](#15-user-ufollow-other-user-mutation)
 ### comments
-- [User Comment Post](#22-user-comment-post-mutation)
+- [User Comment Post](#23-user-comment-post-mutation)
+### Search
+- [User Search For Other User](#22-user-search-for-other-user)
 
 ### 1. User SignUp: MUTATION
 
@@ -749,7 +751,62 @@ Response
     }
 }
 ```
-### 22 User Comment Post-Mutation
+
+### 22 User Search For Other User
+Body
+```gql
+mutation ex{
+    searchUser(
+     search:"sheezy"
+    ){
+     firstname
+    lastname
+    username
+    password
+    email
+    profilePicture
+    isVerified
+    role
+    bio
+    website
+  createdAt
+  }
+}
+```
+Response
+```json
+        "searchUser": [
+            {
+                "firstname": "Habiman",
+                "lastname": "Sharif",
+                "username": "sheezy7",
+                "password": null,
+                "email": "wizzysharifivk@yahoo.com",
+                "profilePicture": "none",
+                "isVerified": "true",
+                "role": null,
+                "bio": "**No Biography**",
+                "website": null,
+                "createdAt": null
+            },
+            {
+                "firstname": "Habiman",
+                "lastname": "Sharif",
+                "username": "sheezy",
+                "password": null,
+                "email": "wizzysharifivk@gmail.com",
+                "profilePicture": "none",
+                "isVerified": "true",
+                "role": null,
+                "bio": "**No Biography**",
+                "website": null,
+                "createdAt": null
+            }
+        ]
+    }
+}
+```
+### 23 User Comment Post-Mutation
 Body
 ```gql
 mutation ex  {
@@ -761,7 +818,6 @@ mutation ex  {
     {
       message  
     }
-}
 ```
 Response
 ```json
