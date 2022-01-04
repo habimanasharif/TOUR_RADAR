@@ -22,6 +22,8 @@ JWT_SECRET=
 - [User LogIn](#2-user-LogIn-mutation)
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
+- [User Update Profile](#13-user-update-profile-mutation)
+
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
 - [Admin Fetch ALL IsGuider Verification Request](#7-admin-fetch-verification-request-query)
@@ -30,6 +32,12 @@ JWT_SECRET=
 - [User Create Post](#9-user-create-post-mutation)
 - [User Fetch All Posts](#10-user-fetch-posts-query)
 - [User Delete Own Post](#11-user-delete-own-posts-mutation)
+### Likes
+- [User Like Post](#12-user-like-post-mutation)
+
+### Follow
+- [User Follow Other User](#14-user-follow-other-user-mutation)
+- [User UnFollow Other User](#15-user-follow-other-user-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -292,14 +300,24 @@ Response
 ### 10. User Fetch Posts-Query
 Body
 ```gql
-uery ex{
+query ex{
     posts{
+        _id
         owner{
+            _id
             username
             profilePicture
         }
+        likes{
+                username
+                profilePicture
+          
+        }
+        isLiked
+        likesNo
         content
         location
+        createdAt
     }
 }
 ```
@@ -309,32 +327,35 @@ Response
     "data": {
         "posts": [
             {
-                "_id": "61bcbe59c3cc2b437cfcbb26",
+                "_id": "61c325c31b0cf98eda97b771",
                 "owner": {
                     "_id": "61bbb4a966cdd3c3a93e4bee",
                     "username": "sharif",
                     "profilePicture": "none"
                 },
-                "content": [
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639759428/ldh1ec3mgreimtgjs5bz.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639759438/q7uoxylh9ggpdrxn3vg8.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639759448/kck9alz50cpmvue08iuq.jpg"
+                "likes": [
+                    {
+                        "username": "sharif",
+                        "profilePicture": "none"
+                    },
+                    {
+                        "username": "keleva",
+                        "profilePicture": "none"
+                    },
+                    {
+                        "username": "keleva",
+                        "profilePicture": "none"
+                    }
                 ],
-                "location": "Kigali,Rwanda"
-            },
-            {
-                "_id": "61bcb51be3202417a130358a",
-                "owner": {
-                    "_id": "61bbb4a966cdd3c3a93e4bee",
-                    "username": "sharif",
-                    "profilePicture": "none"
-                },
+                "isLiked": true,
+                "likesNo": 3,
                 "content": [
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639757067/p6muxrurlher5pb2ryak.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639757077/urqyb3upmgurlz64baou.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1639757082/wfrpe94lfimca37poiup.jpg"
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640179116/wok5mebmxzw9t5nrhfhi.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640179129/r1hf2hw17mfymhk8caud.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640179138/fq4jc71gwsfruv813cu6.jpg"
                 ],
-                "location": "Kigali,Rwanda"
+                "location": "Kigali,Rwanda",
+                "createdAt": 1640179139997
             }
         ]
     }
@@ -360,3 +381,114 @@ Response
     }
 }
 ```
+### 12 User Like Post-Mutation
+Body
+```gql
+mutation ex{
+    likePost(postId:"61c325c31b0cf98eda97b771"){
+message
+}
+}
+```
+Response
+```json
+{
+    "data": {
+        "likePost": {
+            "message": " Post liked Successfully"
+        }
+    }
+}
+```
+### 13 User Update Profile-Mutation
+Body
+```gql
+mutation ex{
+    updateUser(
+        input:{
+            firstname:"Tyflex"
+            lastname:"umuhuza"
+            bio:"tyflex is cool"
+        }
+        ){
+        bio
+        firstname
+        lastname
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "updateUser": {
+            "bio": "tyflex is cool",
+            "firstname": "Tyflex",
+            "lastname": "umuhuza"
+        }
+    }
+}
+```
+### 14 User Follow Other User-mutation
+Body
+```gql
+mutation ex{
+    followUser(userId:"61c5d14e7971b5c9a44d78a8")
+    {
+    message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "likePost": {
+            "message": " User Followed Successfully"
+        }
+    }
+}
+```
+### 15 User Follow Other User-mutation
+Body
+```gql
+mutation ex{
+    unfollowUser(userId:"61c5d14e7971b5c9a44d78a8")
+    {
+    message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "likePost": {
+            "message": " User UnFollowed Successfully"
+        }
+    }
+}
+```
+### 16 user commenting on posts
+Body 
+```gql
+mutation ex  {
+    commentPost(
+   postId: "61cab12e91f1cd2ef9a16f26"
+    content:"this is awesome"
+    )
+
+    {
+      message  
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "commentPost": {
+            "message": "comment created successfully"
+        }
+    }
+}

@@ -7,6 +7,7 @@ import { UserInputError, AuthenticationError } from 'apollo-server';
 import { sign, verify } from '../helpers/jwt';
 import { generate, check } from '../helpers/bcrypt';
 import UserService from '../database/services/users';
+import FollowService from '../database/services/follow';
 import VerifyGuiderService from '../database/services/verifyGuider';
 import { mailer } from '../helpers/mailer';
 import * as Validations from '../middleware/validation/user';
@@ -70,7 +71,26 @@ class User {
     if (exist.isVerified === true) throw new UserInputError('USER ALREADY VERIFIED');
     const verifiedAccount = await UserService.updateUser({ email }, { isVerified: true });
     verifiedAccount.password = undefined;
+    const follow = {
+      owner: verifiedAccount._id,
+      follower: [],
+      following: []
+    };
+    await FollowService.createFollow(follow);
     return verifiedAccount;
+  }
+
+  static async updateUser(parent:any, { input }:{input:any}, ctx:any) {
+    const user = await isUser(ctx);
+    const userExists = await UserService.findUser({ _id: user });
+    if (!userExists) {
+      throw new UserInputError("USER DOES'NT EXIST");
+    }
+    if (userExists.isVerified === false) throw new UserInputError('User Is Not verified');
+    Validations.update(input);
+    const update = await UserService.updateUser({ _id: user }, input);
+
+    return update;
   }
 
   static async verifyGuider(parent:any, { cirtificate }:{cirtificate:string}, ctx:any) {
