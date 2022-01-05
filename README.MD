@@ -38,6 +38,8 @@ JWT_SECRET=
 ### Follow
 - [User Follow Other User](#14-user-follow-other-user-mutation)
 - [User UnFollow Other User](#15-user-follow-other-user-mutation)
+### comments
+- [User Comment  Post](#16-user-comment-post-mutation)
 
 ### 1. User SignUp: MUTATION
 
