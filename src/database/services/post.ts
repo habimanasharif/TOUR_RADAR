@@ -33,7 +33,16 @@ class PostService {
 
   static async fetchSinglePost(id:any) {
     try {
-      return await Posts.findOne({ _id: id });
+      return await Posts.findOne({ _id: id }).populate('owner', ['username', 'profilePicture']);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findOwnerPosts(id:any) {
+    try {
+      return await Posts.find(id)
+        .sort({ createdAt: -1 });
     } catch (error) {
       throw error;
     }

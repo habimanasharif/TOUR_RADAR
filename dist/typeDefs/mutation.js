@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mutation = void 0;
 /* eslint-disable import/prefer-default-export */
-import { gql } from 'apollo-server';
-
-const mutation = gql`
+const apollo_server_1 = require("apollo-server");
+const mutation = (0, apollo_server_1.gql) `
 input user {
   firstname: String!
   lastname:String!
@@ -73,11 +75,6 @@ scalar Upload
    likePost(
      postId:String!
    ):Message
-  
-  commentPost(
-    postId:String
-    content:String
-  ): Message
   followUser(
     userId:String!
   ):Message
@@ -89,14 +86,10 @@ scalar Upload
   ):Message
   removeProfilePicture:Message
   changePassword(oldPassword:String,newPassword:String):Message
-  unLikePost(postId:String!):Message
   }
   
     
   
  
 `;
-
-export {
-  mutation,
-};
+exports.mutation = mutation;

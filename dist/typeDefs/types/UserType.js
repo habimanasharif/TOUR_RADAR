@@ -1,6 +1,7 @@
-import { gql } from 'apollo-server';
-
-const userType = gql`
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const apollo_server_1 = require("apollo-server");
+const userType = (0, apollo_server_1.gql) `
   type User {
     _id:String
     firstname: String
@@ -27,4 +28,4 @@ const userType = gql`
   }
   
 `;
-export default userType;
+exports.default = userType;

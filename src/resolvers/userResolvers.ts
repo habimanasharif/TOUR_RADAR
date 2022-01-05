@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 import { User } from '../controllers';
 
 const userResolvers = {
   Query: {
-  //  users: () => User.fetchUsers(),
+    userProfile: (parent:any, args:any, ctx:any) => User.fetchUserProfile(parent, args, ctx),
   },
   Mutation: {
     signUp: (parent:any, args:any, ctx:any) => User.signUp(parent, args, ctx),
@@ -11,7 +12,10 @@ const userResolvers = {
     logIn: (parent:any, args:any, ctx:any) => User.logIn(parent, args, ctx),
     verifyEmail: (parent:any, args:any, ctx:any) => User.verifyEmail(parent, args, ctx),
     updateUser: (parent:any, args:any, ctx:any) => User.updateUser(parent, args, ctx),
-    verifyGuider: (parent:any, args:any, ctx:any) => User.verifyGuider(parent, args, ctx)
+    verifyGuider: (parent:any, args:any, ctx:any) => User.verifyGuider(parent, args, ctx),
+    updateProfilePicture: (parent:any, args:any, ctx:any) => User.updateProfilePicture(parent, args, ctx),
+    removeProfilePicture: (parent:any, args:any, ctx:any) => User.removeProfilePicture(parent, args, ctx),
+    changePassword: (parent:any, args:any, ctx:any) => User.changePassword(parent, args, ctx),
   }
 };
 

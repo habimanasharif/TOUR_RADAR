@@ -12,8 +12,18 @@ Run
 Create a .env file in the root directory and paste in this
 
 ```
-MONGO_URI=
-JWT_SECRET=
+MONGO_URI= 
+JWT_SECRET= 
+CLIENT_ID =
+HOST= 
+CLIENT_SECRET =
+REDIRECT_URI =
+REFRESH_TOKEN =
+username = 
+password = 
+CLOUDINARY_API_KEY = 
+CLOUDINARY_API_SECRET = 
+CLOUDINARY_NAME = 
 ```
 ## Menu
 
@@ -23,6 +33,10 @@ JWT_SECRET=
 - [User Verify Email](#3-user-verify-email-mutation)
 - [User Request IsGuider Verification](#5-user-request-isguider-verification-mutation)
 - [User Update Profile](#13-user-update-profile-mutation)
+- [User fetch User Profile](#16-user-fetch-user-profile-query)
+- [User Update Profile Picture](#17-user-updtae-profile-picture-mutation)
+- [User Remove Profile Picture](#19-user-remove-profile-picture-mutation)
+- [User Change Password](#20-user-change-password-mutation)
 
 ### Admin
 - [Admin Login](#4-admin-login-mutation)
@@ -32,14 +46,16 @@ JWT_SECRET=
 - [User Create Post](#9-user-create-post-mutation)
 - [User Fetch All Posts](#10-user-fetch-posts-query)
 - [User Delete Own Post](#11-user-delete-own-posts-mutation)
+- [User Fetch Single  Post](#18-user-fetch-single-posts-query)
 ### Likes
 - [User Like Post](#12-user-like-post-mutation)
+- [User UnLike Post](#21-user-unlike-post-mutation)
 
 ### Follow
 - [User Follow Other User](#14-user-follow-other-user-mutation)
-- [User UnFollow Other User](#15-user-follow-other-user-mutation)
+- [User UnFollow Other User](#15-user-ufollow-other-user-mutation)
 ### comments
-- [User Comment  Post](#16-user-comment-post-mutation)
+- [User Comment Post](#22-user-comment-post-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -53,7 +69,6 @@ mutation Example {
       username:"sharif" ,
       password:"test123",
       email:"wizzysharifivk@gmail.com"
-
 }
   ){
      firstname
@@ -471,8 +486,228 @@ Response
     }
 }
 ```
-### 16 user commenting on posts
-Body 
+### 16 User Fetch User Profile Query
+Body
+```gql
+query ex {
+    userProfile(
+       userId:"61c5ccf3a197b25038a11bad"
+    ){
+      username
+      firstname
+      lastname
+      bio
+      isGuider
+      isFollowing
+      isUser
+      posts{
+          _id
+          location
+          content
+          caption
+          isLiked
+          likesNo
+          createdAt
+          caption
+          likes{
+              username
+              profilePicture
+          }
+      }
+      followers
+      following
+      allFollowers{
+          username
+          profilePicture
+      }
+      allFollowing{
+          username
+          profilePicture
+      }
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "userProfile": {
+            "username": "kelevaj",
+            "firstname": "Umuhuza",
+            "lastname": "Clever",
+            "bio": "**No Biography**",
+            "isGuider": "true",
+            "isFollowing": false,
+            "isUser": true,
+            "posts": [
+                {
+                    "_id": "61cab12e91f1cd2ef9a16f26",
+                    "location": "Kigali,Rwanda",
+                    "content": [
+                        "https://res.cloudinary.com/trio-code/image/upload/v1640673556/bsj5cgor6tybtjynb6go.jpg",
+                        "https://res.cloudinary.com/trio-code/image/upload/v1640673570/wkqwlhhorynijfmad0lr.jpg",
+                        "https://res.cloudinary.com/trio-code/image/upload/v1640673581/ylj4yhjauuxzxw71ovug.jpg"
+                    ],
+                    "caption": "To night was lit",
+                    "isLiked": true,
+                    "likesNo": 1,
+                    "createdAt": 1640673582673,
+                    "likes": [
+                        {
+                            "username": "kelevaj",
+                            "profilePicture": "none"
+                        }
+                    ]
+                }
+            ],
+            "followers": 0,
+            "following": 1,
+            "allFollowers": [],
+            "allFollowing": [
+                {
+                    "username": "sheezy",
+                    "profilePicture": "none"
+                }
+            ]
+        }
+    }
+}
+```
+### 17 User Update Profile Picture-Mutation
+Body
+```gql
+mutation ex {
+   updateProfilePicture(picture:"/media/ty-flex/files/greencard/CROPPED-_DSC3111.JPG"){
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "updateProfilePicture": {
+            "message": "Profile Picture Update successfully"
+        }
+    }
+}
+```
+### 18 User Fetch Single Posts Query 
+Body
+```gql
+query ex{
+    fetchSinglePost(postId:"61cab12e91f1cd2ef9a16f26"){
+       _id
+        owner{
+            _id
+            username
+            profilePicture
+        }
+        likes{
+                username
+                profilePicture
+          
+        }
+        isLiked
+        likesNo
+        content
+        location
+        createdAt 
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "fetchSinglePost": {
+            "_id": "61cab12e91f1cd2ef9a16f26",
+            "owner": {
+                "_id": "61c5ccf3a197b25038a11bad",
+                "username": "kelevaj",
+                "profilePicture": "https://res.cloudinary.com/trio-code/image/upload/v1640774007/ngksyqiplwn0afqsby0h.jpg"
+            },
+            "likes": [
+                {
+                    "username": "kelevaj",
+                    "profilePicture": "https://res.cloudinary.com/trio-code/image/upload/v1640774007/ngksyqiplwn0afqsby0h.jpg"
+                }
+            ],
+            "isLiked": true,
+            "likesNo": 1,
+            "content": [
+                "https://res.cloudinary.com/trio-code/image/upload/v1640673556/bsj5cgor6tybtjynb6go.jpg",
+                "https://res.cloudinary.com/trio-code/image/upload/v1640673570/wkqwlhhorynijfmad0lr.jpg",
+                "https://res.cloudinary.com/trio-code/image/upload/v1640673581/ylj4yhjauuxzxw71ovug.jpg"
+            ],
+            "location": "Kigali,Rwanda",
+            "createdAt": 1640673582673
+        }
+    }
+}
+```
+### 19 User Remove Profile Picture-Mutation
+Body
+```gql
+mutation ex {
+    removeProfilePicture{
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "removeProfilePicture": {
+            "message": "Profile Picture Removed successfully"
+        }
+    }
+}
+```
+### 20 User Change Password-Mutation
+Body
+```gql
+mutation ex{
+    changePassword(
+        oldPassword:"123test"
+        newPassword:"test123"
+    ){
+        message
+    }
+}
+```
+Response
+```json
+{
+    "data": {
+        "changePassword": {
+            "message": "Password Changed Succefully"
+        }
+    }
+}
+```
+### 21 User UnLike Post-Mutation
+Body
+```gql
+mutation ex {
+    unLikePost(postId:"61cab12e91f1cd2ef9a16f26"){
+        message
+    }
+}
+```
+```json
+Response
+{
+    "data": {
+        "unLikePost": {
+            "message": "Post Unliked Successfully"
+        }
+    }
+}
+```
+### 22 User Comment Post-Mutation
+Body
 ```gql
 mutation ex  {
     commentPost(
@@ -485,8 +720,8 @@ mutation ex  {
     }
 }
 ```
-Response
 ```json
+Response
 {
     "data": {
         "commentPost": {

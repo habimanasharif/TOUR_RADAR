@@ -6,10 +6,12 @@ const postResolvers = {
     createPost: (parent:any, args:any, ctx:any) => Post.createPost(parent, args, ctx),
     deletePost: (parent:any, args:any, ctx:any) => Post.deletPost(parent, args, ctx),
     commentPost: (parent:any, args:any, ctx:any) => Post.commentPost(parent, args, ctx),
-    likePost: (parent:any, args:any, ctx:any) => Post.likePost(parent, args, ctx)
+    likePost: (parent:any, args:any, ctx:any) => Post.likePost(parent, args, ctx),
+    unLikePost: (parent:any, args:any, ctx:any) => Post.UnLikePost(parent, args, ctx),
   },
   Query: {
     posts: (parent:any, args:any, ctx:any) => Post.fetchPost(parent, args, ctx),
+    fetchSinglePost: (parent:any, args:any, ctx:any) => Post.fetchSinglePost(parent, args, ctx),
   },
 };
 
