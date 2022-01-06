@@ -720,8 +720,8 @@ mutation ex  {
     }
 }
 ```
-```json
 Response
+```json
 {
     "data": {
         "commentPost": {

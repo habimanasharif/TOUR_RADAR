@@ -56,10 +56,8 @@ class Post {
 
   // eslint-disable-next-line max-len
   static async commentPost(_parent:any, { postId, content }: {postId:string, content:string}, ctx:any) {
-    console.log('cfhdufcnhdxu');
     const id = await isUser(ctx);
     const post = await PostService.fetchSinglePost(postId);
-    console.log('cfhdufcnhdxu');
 
     const user = await UserService.findUser({ _id: id });
 
