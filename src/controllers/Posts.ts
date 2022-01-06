@@ -57,7 +57,7 @@ class Post {
   // eslint-disable-next-line max-len
   static async commentPost(_parent:any, { postId, content }: {postId:string, content:string}, ctx:any) {
     const id = await isUser(ctx);
-    const post = await PostService.fetchSinglePost(postId);
+    const post = await PostService.fetchSinglePost({ _id: postId });
 
     const user = await UserService.findUser({ _id: id });
 
@@ -90,10 +90,14 @@ class Post {
     if (!user) throw new UserInputError('User Not found');
     if (!post) throw new UserInputError('Post Not Found');
     const postLikes = await LikeService.findAllLikes({ post: postId });
+    const postComments = await CommentService.fetchPostComments({ post: postId });
     const like = postLikes[0].likes;
     const likeNo = like.length;
     const isLiked = await LikeService.findLike(id, postId);
     post.isLiked = (isLiked.length > 0);
+    post.comments = postComments;
+    post.commentNo = postComments.length;
+
     post.likesNo = likeNo;
     post.likes = like;
     return post;

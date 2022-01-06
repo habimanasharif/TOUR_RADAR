@@ -9,6 +9,8 @@ const PostType = gql`
       isLiked:Boolean
       likesNo:Int
       likes:[User]
+      comments:[comment]
+      commentNo:Int
       location:String
       content:[String]
   }

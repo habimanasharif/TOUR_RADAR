@@ -4,10 +4,10 @@
 import query from './query';
 import { mutation } from './mutation';
 import {
-  userType, AdminType, verificationType, PostType, MessageType, LikeType
+  userType, AdminType, verificationType, PostType, MessageType, LikeType, CommentType
 } from './types';
 
-const typeDefs = [query, mutation, userType, AdminType, verificationType, PostType, MessageType, LikeType];
+const typeDefs = [query, mutation, userType, AdminType, verificationType, PostType, MessageType, LikeType, CommentType];
 
 export {
   typeDefs,

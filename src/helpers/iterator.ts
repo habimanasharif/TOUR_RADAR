@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty */
 import LikeService from '../database/services/like';
+import commentService from '../database/services/comment';
 
 export const allPostsIterator = async (id:string, posts:any) => {
   try {
@@ -25,6 +26,7 @@ export const allPostsIterator = async (id:string, posts:any) => {
         likes._doc.fullname = `${likee.firstname} ${likee.lastname}`;
         return liker;
       }));
+      const comments = await commentService.fetchPostComments({ post: postId });
       if (like.length === 0) {
         result._doc.likes = 'none';
         result._doc.likesNo = 0;
@@ -32,6 +34,8 @@ export const allPostsIterator = async (id:string, posts:any) => {
         result.likes = like;
         result.likesNo = likers.length;
       }
+      result.commentNo = comments.length;
+      result.comments = comments;
 
       return result;
     }));

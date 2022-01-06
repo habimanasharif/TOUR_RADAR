@@ -333,6 +333,14 @@ query ex{
         isLiked
         likesNo
         content
+        commentNo
+        comments{
+            user{
+                username
+                profilePicture
+            }
+            content
+        }
         location
         createdAt
     }
@@ -344,35 +352,44 @@ Response
     "data": {
         "posts": [
             {
-                "_id": "61c325c31b0cf98eda97b771",
+                "_id": "61cab12e91f1cd2ef9a16f26",
                 "owner": {
-                    "_id": "61bbb4a966cdd3c3a93e4bee",
-                    "username": "sharif",
+                    "_id": "61c5ccf3a197b25038a11bad",
+                    "username": "kelevaj",
                     "profilePicture": "none"
                 },
                 "likes": [
                     {
-                        "username": "sharif",
-                        "profilePicture": "none"
-                    },
-                    {
-                        "username": "keleva",
-                        "profilePicture": "none"
-                    },
-                    {
-                        "username": "keleva",
+                        "username": "kelevaj",
                         "profilePicture": "none"
                     }
                 ],
                 "isLiked": true,
-                "likesNo": 3,
+                "likesNo": 1,
                 "content": [
-                    "https://res.cloudinary.com/trio-code/image/upload/v1640179116/wok5mebmxzw9t5nrhfhi.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1640179129/r1hf2hw17mfymhk8caud.jpg",
-                    "https://res.cloudinary.com/trio-code/image/upload/v1640179138/fq4jc71gwsfruv813cu6.jpg"
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640673556/bsj5cgor6tybtjynb6go.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640673570/wkqwlhhorynijfmad0lr.jpg",
+                    "https://res.cloudinary.com/trio-code/image/upload/v1640673581/ylj4yhjauuxzxw71ovug.jpg"
+                ],
+                "commentNo": 2,
+                "comments": [
+                    {
+                        "user": {
+                            "username": "kelevaj",
+                            "profilePicture": "none"
+                        },
+                        "content": "I would love to pay a vist"
+                    },
+                    {
+                        "user": {
+                            "username": "sheezy",
+                            "profilePicture": "none"
+                        },
+                        "content": "this is awesome"
+                    }
                 ],
                 "location": "Kigali,Rwanda",
-                "createdAt": 1640179139997
+                "createdAt": 1640673582673
             }
         ]
     }
@@ -611,9 +628,18 @@ query ex{
         isLiked
         likesNo
         content
+        commentNo
+        comments{
+            user{
+                username
+                profilePicture
+            }
+            content
+        }
         location
         createdAt 
     }
+
 }
 ```
 Response
@@ -625,12 +651,12 @@ Response
             "owner": {
                 "_id": "61c5ccf3a197b25038a11bad",
                 "username": "kelevaj",
-                "profilePicture": "https://res.cloudinary.com/trio-code/image/upload/v1640774007/ngksyqiplwn0afqsby0h.jpg"
+                "profilePicture": "none"
             },
             "likes": [
                 {
                     "username": "kelevaj",
-                    "profilePicture": "https://res.cloudinary.com/trio-code/image/upload/v1640774007/ngksyqiplwn0afqsby0h.jpg"
+                    "profilePicture": "none"
                 }
             ],
             "isLiked": true,
@@ -639,6 +665,23 @@ Response
                 "https://res.cloudinary.com/trio-code/image/upload/v1640673556/bsj5cgor6tybtjynb6go.jpg",
                 "https://res.cloudinary.com/trio-code/image/upload/v1640673570/wkqwlhhorynijfmad0lr.jpg",
                 "https://res.cloudinary.com/trio-code/image/upload/v1640673581/ylj4yhjauuxzxw71ovug.jpg"
+            ],
+            "commentNo": 2,
+            "comments": [
+                {
+                    "user": {
+                        "username": "kelevaj",
+                        "profilePicture": "none"
+                    },
+                    "content": "I would love to pay a vist"
+                },
+                {
+                    "user": {
+                        "username": "sheezy",
+                        "profilePicture": "none"
+                    },
+                    "content": "this is awesome"
+                }
             ],
             "location": "Kigali,Rwanda",
             "createdAt": 1640673582673
