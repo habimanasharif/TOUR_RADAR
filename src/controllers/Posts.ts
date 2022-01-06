@@ -12,6 +12,7 @@ import { allPostsIterator } from '../helpers/iterator';
 import { isUser } from '../middleware/authorization';
 import imageArray from '../helpers/imageArray';
 import extension from '../helpers/extention';
+import CommentService from '../database/services/comment';
 
 class Post {
   static async createPost(_parent:any, { input }:{input:any}, ctx:any) {
@@ -51,6 +52,25 @@ class Post {
     if (post.owner !== user) throw new UserInputError('You are not allowed to delete  this post');
     const posts = await PostService.deletePost(id);
     return { message: ' Post Deleted Successfully' };
+  }
+
+  // eslint-disable-next-line max-len
+  static async commentPost(_parent:any, { postId, content }: {postId:string, content:string}, ctx:any) {
+    console.log('cfhdufcnhdxu');
+    const id = await isUser(ctx);
+    const post = await PostService.fetchSinglePost(postId);
+    console.log('cfhdufcnhdxu');
+
+    const user = await UserService.findUser({ _id: id });
+
+    if (!user) throw new UserInputError('user does not exist');
+
+    if (!post) throw new UserInputError('post not found');
+
+    const comment = { user: id, post: postId, content };
+    await CommentService.createComment(comment);
+
+    return { message: 'comment created successfully' };
   }
 
   static async likePost(parent:any, { postId }:{postId:string}, ctx:any) {

@@ -73,6 +73,11 @@ scalar Upload
    likePost(
      postId:String!
    ):Message
+  
+  commentPost(
+    postId:String
+    content:String
+  ): Message
   followUser(
     userId:String!
   ):Message

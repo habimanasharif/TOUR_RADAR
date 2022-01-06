@@ -54,6 +54,8 @@ CLOUDINARY_NAME =
 ### Follow
 - [User Follow Other User](#14-user-follow-other-user-mutation)
 - [User UnFollow Other User](#15-user-ufollow-other-user-mutation)
+### comments
+- [User Comment Post](#22-user-comment-post-mutation)
 
 ### 1. User SignUp: MUTATION
 
@@ -67,7 +69,6 @@ mutation Example {
       username:"sharif" ,
       password:"test123",
       email:"wizzysharifivk@gmail.com"
-
 }
   ){
      firstname
@@ -613,7 +614,6 @@ query ex{
         location
         createdAt 
     }
-
 }
 ```
 Response
@@ -687,7 +687,7 @@ Response
     }
 }
 ```
-### 12 User UnLike Post-Mutation
+### 21 User UnLike Post-Mutation
 Body
 ```gql
 mutation ex {
@@ -706,3 +706,26 @@ Response
     }
 }
 ```
+### 22 User Comment Post-Mutation
+Body
+```gql
+mutation ex  {
+    commentPost(
+   postId: "61cab12e91f1cd2ef9a16f26"
+    content:"this is awesome"
+    )
+
+    {
+      message  
+    }
+}
+```
+```json
+Response
+{
+    "data": {
+        "commentPost": {
+            "message": "comment created successfully"
+        }
+    }
+}
