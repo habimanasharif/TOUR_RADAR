@@ -21,7 +21,7 @@ class Post {
     if (!user) throw new UserInputError('User Not found');
     if (user.isVerified !== true) throw new UserInputError('Verify Your Email First');
     if (user.isGuider !== true) throw new UserInputError("This user can't post ");
-
+    if (input.content.length === 0) throw new UserInputError('Please Atleastselect Onefile');
     input.content.forEach((element:any) => {
       element = extension(element);
       if ((element !== 'jpg') && (element !== 'JPG') && element !== 'png' && element !== 'jpeg' && element !== 'JPEG') { throw new UserInputError('UNSUPPORTED FILE'); }
